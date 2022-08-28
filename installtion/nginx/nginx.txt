@@ -1,0 +1,76 @@
+
+in /etc/nginx/nginx.conf file add below
+
+
+events {}
+http {
+    upstream backends {
+        server n1:80;
+        server n2:80;
+
+    }
+
+# for HTTP
+# change like follows in [server] section
+    server {
+        listen      80 default_server;
+        listen      [::]:80 default_server;
+
+        location / {
+            proxy_pass http://backends;
+        }
+    }
+
+}
+
+
+=======================
+[root@chakra ~]# htpasswd -c /etc/nginx/.htpasswd chintu
+New password:
+Re-type new password:
+Adding password for user chintu
+
+
+
+[root@chakra ~]# cat /etc/nginx/nginx.conf
+events {}
+http {
+    upstream backends {
+        server n1:80;
+        server n2:81;
+
+    }
+
+# for HTTP
+# change like follows in [server] section
+    server {
+        listen      80 default_server;
+        listen      [::]:80 default_server;
+
+        location / {
+            proxy_pass http://backends;
+            auth_basic "Restricted Content";
+            auth_basic_user_file /etc/nginx/.htpasswd;
+        }
+    }
+
+}
+
+
+===============
+Reverse proxy
+=============
+[root@chakra nginx]# cat nginx.conf
+events {}
+
+http {
+server {
+    listen 80;
+    listen [::]:80;
+    server_name 15.213.148.154;
+
+    location / {
+       proxy_pass http://n2:81/;
+    }
+}
+}
