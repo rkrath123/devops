@@ -7,7 +7,7 @@ pipeline {
                 echo 'Hello Build'
             }
         }
-        stage('Deploy') {
+        stage('Deployng') {
             steps {
                 echo 'Hello Deploy'
             }
