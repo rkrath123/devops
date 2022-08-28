@@ -1,0 +1,39 @@
+Step 1: Download WebHook Relay Agent on the local system
+Copy and execute the command 
+curl -sSL https://storage.googleapis.com/webhookrelay/downloads/relay-linux-amd64 > relay && chmod +wx relay && sudo mv relay /usr/local/bin
+
+
+Step 2: Create a Webhook Relay Account
+https://my.webhookrelay.com/register
+After successfully signing up we will land on Webhook Relay home page.
+
+create new token
+https://my.webhookrelay.com/tokens
+
+[root@rhel86 ~]# relay login -k 991e63f6-3053-4d5e-9988-521f81242717 -s o0AMaEZXI0dW
+Clearing existing credentials...
+Not logged in to my.webhookrelay.com:443
+Not logged in to my.webhookrelay.com:8080
+Not logged in to tnl.webrelay.io
+Saving new credentials to /root/.webhookrelay/config.json
+success
+
+
+[root@rhel86 ~]# export RELAY_KEY=991e63f6-3053-4d5e-9988-521f81242717
+[root@rhel86 ~]# export RELAY_SECRET=o0AMaEZXI0dW
+
+
+[root@rhel86 ~]# relay forward --bucket gitlab-jenkins http://localhost:8080/github-webhook/
+Forwarding:
+https://aft5yf3i1c7xjri06lxitj.hooks.webhookrelay.com -> http://localhost:8080/github-webhook/
+Starting webhook relay agent...
+2022-08-28 01:46:49.401 INFO    using standard transport...
+2022-08-28 01:46:49.958 INFO    webhook relay ready...  {"host": "my.webhookrelay.com:8080", "buckets": ["aba4b2ee-b8dc-4da5-b879-fdd6cd506119"]}
+2022-08-28 01:49:52.309 INFO    webhook request relayed {"destination": "http://localhost:8080/github-webhook/", "method": "POST", "bucket": "gitlab-jenkins", "status": "200 OK", "retries": 0}
+received an interrupt, closing connection...
+
+
+
+go to to gitgub account, in repo setting add below in webhook -https://aft5yf3i1c7xjri06lxitj.hooks.webhookrelay.com 
+
+
