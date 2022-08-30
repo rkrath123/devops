@@ -1,4 +1,5 @@
 
+
 in /etc/nginx/nginx.conf file add below
 
 
