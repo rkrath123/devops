@@ -1,0 +1,113 @@
+Kubernatics
+
+kubectl proxy --port 8080 #127.0.0.1:8080
+kubectl api-resorces
+kubectl explain pod
+kubectl explain pods.spec
+kubectl run mycurlpod --image=curlimages/curl -i --tty --rm -- sh
+
+
+kubectl run nginx --image=nginx --dry-run=client --port=80 -o yaml
+
+labels & selector
+----------------
+ kubectl get pods -A -o wide -l app=nginx
+kubectl label pods nginx-76d6c9b8c-6hph7 env=dev
+kubectl label pods nginx-76d6c9b8c-dxm7x env=prod
+root@Jay-Sri-Krishna:~# kubectl get pods -A -o wide -l env=prod
+root@Jay-Sri-Krishna:~# kubectl get pods --show-labels
+NAME                    READY   STATUS    RESTARTS      AGE   LABELS
+nginx-76d6c9b8c-6hph7   1/1     Running   0             18m   app=nginx,env=dev,pod-template-hash=76d6c9b8c
+nginx-76d6c9b8c-cww9t   1/1     Running   1 (12m ago)   18m   app=nginx,pod-template-hash=76d6c9b8c
+kubectl get pods  -o wide --show-labels -l env!=dev
+
+
+
+
+Replicaset
+-----------
+rs maintain stable setup replica pod running at given time
+kubectl get rs
+ kubectl edit replicasets.apps nginx-76d6c9b8c
+
+deployments
+-----------
+deployment provides functionality with hep of rs along with various capability like rolling out of changes , roll back changes 
+kubectl rollout history deployment nginx
+deployment.apps/nginx
+REVISION  CHANGE-CAUSE
+1         <none>
+ 
+ root@Jay-Sri-Krishna:~# kubectl get rs
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-69c7776c94   5         5         5       4s       #nginxlatest
+nginx-744d5cf656   0         0         0       2m27s    #nginx:1.17.3
+
+kubectl rollout history deployment nginx --revision 1
+deployment.apps/nginx with revision #1
+Pod Template:
+  Labels:       app=nginx
+        pod-template-hash=744d5cf656
+  Containers:
+   nginx:
+    Image:      nginx:1.17.3
+
+root@Jay-Sri-Krishna:~# kubectl rollout history deployment nginx --revision 2
+  Image:      nginx
+
+ kubectl rollout undo deployment nginx --to-revision 1 ##nginx:1.17.3
+
+
+
+
+
+
+ root@Jay-Sri-Krishna:~# kubectl get rs
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-69c7776c94   0         0         0       50m
+nginx-744d5cf656   5         5         5       52m
+root@Jay-Sri-Krishna:~#
+
+root@Jay-Sri-Krishna:~# kubectl rollout history deployment nginx
+deployment.apps/nginx
+REVISION  CHANGE-CAUSE
+2         <none>
+3         <none>
+
+kubectl set image deployments nginx=nginx:1.91 --record
+kubectl scale deployment nginx --replicas 100
+kubectl rollout undo deployment nginx
+
+kubectl create deployment  nginx --image=nginx --port=80 --dry-run=client -o yaml >deploy.yaml
+
+
+Deamonset
+---------
+Deamonset ensure all nodes run copy of a pods.
+as nodes are added to tje cluster pods are added to them
+
+root@Jay-Sri-Krishna:~# kubectl get daemonset.apps
+NAME    DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+nginx   2         2         2       2            2           <none>          117s
+root@Jay-Sri-Krishna:~#
+kubectl describe daemonset.apps nginx
+
+
+
+
+Nodeselector
+------------
+nodeselector add us constrain about running a pod in a specific woker node.
+kubectl label nodes kind-worker disk=hdd
+node/kind-worker labeled
+kubectl label nodes kind-worker2 disk=sdd
+kubectl describe nodes kind-worker
+
+in the yaml file add and apply so that it will run on perticualr node
+spec:
+  containers:
+  - image: nginx
+
+  nodeSelector:
+    disk: hdd
+
