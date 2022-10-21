@@ -244,6 +244,7 @@ Cut command:
 
 Practical
 ------------
+```
  cut -c 4,9 /etc/passwd #display character 4th and 9th 
  cut -c 1 /etc/passwd
  cut -c 4-9  /etc/passwd #print 4-9 character
@@ -285,4 +286,6 @@ Practical
  
   [root@veena ~]# httpd -v | grep version | cut -d '/' -f 2 | cut -d ' ' -f 1
   2.4.37
+  
+  ```
 
