@@ -189,4 +189,100 @@ Read file content
 
 
 
+Cut command:
+=============
+	 The 'cut‘ command is a powerful tool to extract parts of each line from a file.
+	 It is based on
+	 Byte Position
+	 Character Position
+	 Fields based on delimiter (by default delimiter is the tab)
+	 Cut command syntax:
+	 cut [options] <positions(fields) /range of positions(fields)> <input_file>
+	 cat file | cut [options] <positions(fields) /range of positions(fields)>
+	 Options: -b -c and -f
+  Rages:
+	2 only second byte/character/filed
+	2- second byte/character/filed to last
+	-7 first to seven
+	3,5 third and fifth
+
+ Cut command for Byte/Character Position:
+	 To cut out a section of a line by specifying a byte/character position use the -b/-c option.
+	 Syntax:
+		cut -b <position’s/range of position’s> file
+		cut -c <position’s/range of position’s> file
+		Position’s: 3,5,10
+		Range of Position’s: 3-7, 6-10
+	 Ex: mytext.txt
+	 cut -b 2 mytext.txt
+	 cut -b 3,7 mytext.txt
+	 cut -b 5-9 mytext.txt
+	 cut -b 5- mytext.txt
+	 cut -b -7, 9 mytext.txt
+	 Use --complement to complement the output
+
+ Cut command for filed Position:
+	 To cut out a section of a line by specifying a field position use the -f option.
+	 Assume fields are like columns, by default cut command will separates columns based on
+	tab(delimiter).
+	 If we want to use different filed separator use -d (delimiter).
+	 Syntax:
+		 cut -f <position’s/range of position’s> file
+		 cut -f <position’s/range of position’
+		ss> [-d ‘
+		:
+		’] [--output-delimiter=‘**’] file
+		 -d is a delimiter like @ , : / etc….
+		 Position’s: 3,5,2
+		 Range of Position’s: 3-7, 6-10
+	 Ex: mytext.txt
+	 cut -f 2 mytext.txt
+	 cut -f 3,7 mytext.txt
+	 cut -f 5-9 mytext.txt
+	 cut -f 5- mytext.txt
+	 cut -f -7, 9 --output-delimiter=“ “ mytext.txt
+
+Practical
+------------
+ cut -c 4,9 /etc/passwd #display character 4th and 9th 
+ cut -c 1 /etc/passwd
+ cut -c 4-9  /etc/passwd #print 4-9 character
+ cut -c 4-9,12  /etc/passwd
+ cut -c -10  /etc/passwd #1 to 10
+ cut -c 5-  /etc/passwd  #5th last
+ 
+ filed should be separated with tab otherwise it will not work
+ cut -f 1 out.txt #fetch first columns filed 
+ cut -f 1,3  out.txt #1st and 3rd filed
+ cut -f 1- out.txt #first to last
+ cut -f -3 out.txt #first to 3rd 
+ 
+ cut -d ':' -f 1 /etc/passwd  #gives all username 
+ cut -d ':' -f 1,4  /etc/passwd  #give 1st and 4th filed
+	root:0
+	bin:1
+	daemon:2
+ cut -d ':' -f 1,4 /etc/passwd --output-delimiter=" " 
+	root 0
+    bin 1
+ [root@veena ~]# crepo --show | cut -d ':' -f 1
+  Cluster-Manager-1.7-rhel85-x86_64
+  HPE-MPI-1.9.1-rhel85-x86_64
+  
+  [root@veena ~]# cat 1.txt
+	abc     def     ghi
+	jkl mnp xyz
+	
+ [root@veena ~]# cat 1.txt  | cut -sf 1
+  abc
+ 
+ [root@veena ~]# cat 1.txt  | cut -d ' ' -sf 1
+ jkl
+ 
+ [root@veena ~]# httpd -v
+ Server version: Apache/2.4.37 (Red Hat Enterprise Linux)
+ Server built:   Jul 12 2021 17:39:44
+ 
+  [root@veena ~]# httpd -v | grep version | cut -d '/' -f 2 | cut -d ' ' -f 1
+  2.4.37
 
