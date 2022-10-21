@@ -101,7 +101,7 @@ less
 more
 
 
-Advanced grep command:
+***Advanced grep command:***
 ======================
  grep command syntax:
  grep [options] “string/pattern” file/files
@@ -141,9 +141,9 @@ Rules to create patterns:
 [[:lower:]] – Lower-case letters: ‘a b c d e f g h i j k l m n o p q r s t u v w x y z’.
 [[:space:]] – Space characters: tab, newline, vertical tab, form feed, carriage return, and space.
 [[:upper:]] – Upper-case letters: ‘A B C D E F G H I J K L M N O P Q R S T U
---------
-examples-
---------
+
+***examples***
+---------------
 grep [options] string/paatern file/files
 grep -irn 'string' file.txt #-i means match both upper/lower case
 grep -w 'string' file.txt  #exact word match
@@ -178,8 +178,9 @@ grep -E 'xf{3,4}\b' test.txt #f may be 3 time or 4 time and space should be end
 grep -E 'xf{3,}' test.txt #f may be 3 time max any time 
 grep -E '[[:digit:]]' file.txt #display digit 
 
-practical
----------
+***practical***
+
+
 ls -ltrh | grep -E '^d' #list of directory
 ls -ltrh | grep -E '^-' #list of file
 grep -E '\b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\b'  ip.txt
