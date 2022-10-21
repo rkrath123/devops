@@ -191,6 +191,7 @@ Read file content
 
 Cut command:
 =============
+```
 	 The 'cut‘ command is a powerful tool to extract parts of each line from a file.
 	 It is based on
 	 Byte Position
@@ -220,8 +221,11 @@ Cut command:
 	 cut -b 5- mytext.txt
 	 cut -b -7, 9 mytext.txt
 	 Use --complement to complement the output
+	
+```
 
   Cut command for filed Position:
+  -------------------------------
   ```
 	 To cut out a section of a line by specifying a field position use the -f option.
 	 Assume fields are like columns, by default cut command will separates columns based on
