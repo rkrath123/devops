@@ -103,36 +103,36 @@ more
 
 ***Advanced grep command:***
 ======================
- grep command syntax:
- grep [options] “string/pattern” file/files
- Basic options: -i -w -v -o -n -c -A -B -C -r -l -h
- Advanced Options: -f -e and –E
- -f Takes search string/pattern from a file, one per line
- -e To search multiple strings/patterns
- Pattern is a string and it represents more than one string.
- -E To work with patterns
- grep -E[options] “pattern” file/files
-Learn how to automate common tasks using bash shell scripting
-Rules to create patterns:
- xy|pq Matches for xy or pq
- ^xyz Matches for the lines which are starting with “xyz”
- xyz$ Matches for the lines which are ending with “xyz”
- ^$ Matches for the lines which are empty
- \ To remove the special purpose of any symbol. Ex: \^ \$
- . Matches any one character
- \. Matches exactly with .
- \b Match the empty string at the edge of word
- ? The preceding character is optional and will be matched, at most, once.
- * The preceding character will be matched zero or more times
- + The preceding character will be matched one or more times
- [xyz] Matches for the lines which are having x or y or z
- [a-d] is equal to [abcd] Matched for the lines which are having a/b/b/d
- [a-ds-z] is eqal to [abcdstuvwxyz]
- ^[abc] Matches for the lines which are starting with a/b/c
- [^abc] Matches for the lines which are not starting with a/b/c
- {N} The preceding string matched exactly N times
- {N,} The preceding string matched N or more times
- {N,M} The preceding string matched at least N times but not more than M times
+	 grep command syntax:
+	 grep [options] “string/pattern” file/files
+	 Basic options: -i -w -v -o -n -c -A -B -C -r -l -h
+	 Advanced Options: -f -e and –E
+	 -f Takes search string/pattern from a file, one per line
+	 -e To search multiple strings/patterns
+	 Pattern is a string and it represents more than one string.
+	 -E To work with patterns
+	 grep -E[options] “pattern” file/files
+	Learn how to automate common tasks using bash shell scripting
+	Rules to create patterns:
+	 xy|pq Matches for xy or pq
+	 ^xyz Matches for the lines which are starting with “xyz”
+	 xyz$ Matches for the lines which are ending with “xyz”
+	 ^$ Matches for the lines which are empty
+	 \ To remove the special purpose of any symbol. Ex: \^ \$
+	 . Matches any one character
+	 \. Matches exactly with .
+	 \b Match the empty string at the edge of word
+	 ? The preceding character is optional and will be matched, at most, once.
+	 * The preceding character will be matched zero or more times
+	 + The preceding character will be matched one or more times
+	 [xyz] Matches for the lines which are having x or y or z
+	 [a-d] is equal to [abcd] Matched for the lines which are having a/b/b/d
+	 [a-ds-z] is eqal to [abcdstuvwxyz]
+	 ^[abc] Matches for the lines which are starting with a/b/c
+	 [^abc] Matches for the lines which are not starting with a/b/c
+	 {N} The preceding string matched exactly N times
+	 {N,} The preceding string matched N or more times
+	 {N,M} The preceding string matched at least N times but not more than M times
 
 [[:alnum:]] – Alphanumeric characters.
 [[:alpha:]] – Alphabetic characters
