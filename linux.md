@@ -113,7 +113,7 @@ Read file content
 	 -E To work with patterns
 	 grep -E[options] “pattern” file/files
 
-Learn how to automate common tasks using bash shell scripting
+ Learn how to automate common tasks using bash shell scripting
 	Rules to create patterns:
 	 xy|pq Matches for xy or pq
 	 ^xyz Matches for the lines which are starting with “xyz”
