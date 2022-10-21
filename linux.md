@@ -222,6 +222,7 @@ Cut command:
 	 Use --complement to complement the output
 
   Cut command for filed Position:
+  ```
 	 To cut out a section of a line by specifying a field position use the -f option.
 	 Assume fields are like columns, by default cut command will separates columns based on
 	tab(delimiter).
@@ -241,7 +242,7 @@ Cut command:
 	 cut -f 5-9 mytext.txt
 	 cut -f 5- mytext.txt
 	 cut -f -7, 9 --output-delimiter=“ “ mytext.txt
-
+```
 Practical
 ------------
 ```
