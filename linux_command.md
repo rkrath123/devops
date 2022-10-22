@@ -357,3 +357,102 @@ Practical
   
   ```
 
+AWK Command
+============
+
+```
+awk command:
+ The awk command is a powerful method for processing or analyzing text or data files ,
+which are organized by lines (rows or records) and columns(fileds).
+ we can use awk as a linux command and also as a scripting language like bash shell
+scripting.
+ Simple awk command syntax:
+ awk [options] ‘[selection _criteria] {action }' input-file
+ cat input-file | awk [options] ‘[selection _criteria] {action }' input-file
+ Awk can take the following options:
+-F fs To specify a field separator. (Default separator is tab and space)
+-f file To specify a file that contains awk script.
+-v var=value To declare a variable.
+ Selection criteria: pattern/condition
+ Action: It is a logic to perform action on each row/record
+
+awk command:
+ Simple awk command syntax:
+ awk ' {action }' input-file
+ Action: Action is a logic to perform action on each record.
+ Example: print $1 print first filed from each line
+ Some of the default variables for awk:
+ $0  Entire file
+ $1  First field from each line/record
+ $2  Second field from each line/record
+ NR  It will print line or record number
+ NF  It will print number of filed from each line/record
+```
+
+Practical
+----------
+
+```
+ [root@veena ~]# httpd -v | grep version |  awk -F '[ /]' '{print $4}'
+	2.4.37
+
+  # awk -F '[ /]'  means delimiter as  ' ' or / #similar to  grep -E [AB]
+  
+ [root@veena ~]# httpd -v |  awk -F '[ /]' ' NR=1 {print $4}'
+  2.4.37
+
+ [root@veena ~]# cat 1.txt
+ abc     def     ghi
+ jkl mnp xyz
+	
+ [root@veena ~]# awk '{print $1}' 1.txt
+ abc
+ jkl
+ 
+  Default delimiter for awk is space . but for cut default delimiter/filed separator is tab
+  
+  to print entire conntent. '{print $0}' or '{print}' both are same.
+  [root@veena ~]# awk '{print $0}' 1.txt
+	abc     def     ghi
+	jkl mnp xyz
+	[root@veena ~]# awk '{print}' 1.txt
+	abc     def     ghi
+	jkl mnp xyz
+	
+ Print 1st and 2nd column 
+ [root@veena ~]# awk '{print $1,$2}' 1.txt
+ abc def
+ jkl mnp
+  
+  Reverse the column
+  [root@veena ~]# awk '{print $2,$1}' 1.txt
+	def abc
+	mnp jkl
+ 
+ list the lines in the files
+ [root@veena ~]# awk '{print NR }' 1.txt
+	1
+	2
+
+ [root@veena ~]# awk '{print NR $0 }' 1.txt
+	1abc    def     ghi
+	2jkl mnp xyz
+
+ [root@veena ~]# awk '{print NR $0 NF }' 1.txt
+	1abc    def     ghi3
+	2jkl mnp xyz3
+ 
+ it will give last column info 
+[root@veena ~]# awk '{print NR $NF }' 1.txt
+	1ghi
+	2xyz
+	
+	$NR means 1st record first field , 2nd record 2nd field
+ [root@veena ~]# cat 1.txt
+	abc     def     ghi
+	jkl mnp xyz
+
+ [root@veena ~]# awk '{print $NR }' 1.txt
+	abc
+	mnp
+```
