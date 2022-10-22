@@ -456,3 +456,31 @@ Practical
 	abc
 	mnp
 ```
+
+TEE Command
+===========
+```
+ tee command is used to display the output and also to store that output into a file. (It does both the
+tasks simultaneously).
+ It is useful to create logs for shell scripting.
+ Syntax:
+ Command | tee outputFile.txt
+ Command | tee –a outputFile.txt
+```
+```
+[root@veena ~]# ls -ltrh | tee abc.txt
+total 44K
+-rw-r--r-- 1 root root 17K Oct 21 19:27 1
+-rw-r--r-- 1 root root 17K Oct 21 19:27 veena6leaders.config
+-rw-r--r-- 1 root root  21 Oct 22 10:05 1.txt
+
+[root@veena ~]# pwd | tee -a abc.txt
+/root
+
+[root@veena ~]# cat abc.txt
+total 44K
+-rw-r--r-- 1 root root 17K Oct 21 19:27 1
+-rw-r--r-- 1 root root 17K Oct 21 19:27 veena6leaders.config
+-rw-r--r-- 1 root root  21 Oct 22 10:05 1.txt
+/root
+```
