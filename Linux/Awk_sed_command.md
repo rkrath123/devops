@@ -68,6 +68,8 @@ root:x:0:0:root:/root:/bin/bash
 operator:x:11:0:operator:/root:/sbin/nologin
 
 ```
+![image](https://user-images.githubusercontent.com/53966749/197750120-236312fa-fcc9-4e8d-bde0-6630218444c5.png)
+
 ![image](https://user-images.githubusercontent.com/53966749/197749780-e2c922be-1bd3-4724-a8e9-688c7f635cca.png)
 ![image](https://user-images.githubusercontent.com/53966749/197749922-36872e43-3c41-4e59-8e79-80021d52f4c7.png)
 
