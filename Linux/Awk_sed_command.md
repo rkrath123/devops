@@ -80,16 +80,17 @@ Define variable inside awk
 [root@veena ~]# cat /etc/passwd | awk -v x=5 '{print $0, x}'
 root:x:0:0:root:/root:/bin/bash 5
 bin:x:1:1:bin:/bin:/sbin/nologin 5
-
+```
 Reading variable value from command:
-
+-------------------------------------
+```
 [root@veena ~]# echo "2 6" | awk '{ print "a="$1 , "b="$2'}
 a=2 b=6
 
 
 ```
-Reading variable for AWK
-------------------------
+Arithimatic operation in  variable for AWK
+-----------------------------------------
 ```
 [root@veena ~]# echo "2 6" | awk '{ x=$1 ;y=$2 ;print x+y}'
 8
