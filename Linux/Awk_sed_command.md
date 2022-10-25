@@ -169,6 +169,7 @@ veena6leaders.config.back
 
 searching conntent with sed command
 -----------------------------------
+```
 
 to search word in file
 [root@veena rama]# sed -n '/admin_mgmt_interfaces/p' veena6leaders.config
