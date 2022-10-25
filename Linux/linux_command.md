@@ -484,3 +484,32 @@ total 44K
 -rw-r--r-- 1 root root  21 Oct 22 10:05 1.txt
 /root
 ```
+Printf command
+---------------
+both printf and echo used display string or values of variable
+echo sends newline at the end of o/p but no way to send and EOF in printf
+
+[root@veena rama]# echo "shell script"
+shell script
+[root@veena rama]# printf "shell script"
+shell script[root@veena rama]#
+
+[root@veena rama]# printf "shell script\n"
+shell script
+[root@veena rama]#
+
+[root@veena rama]# x=79
+[root@veena rama]# echo $x
+79
+[root@veena rama]# printf "$x"
+79[root@veena rama]# printf "$x\n"
+79
+
+[root@veena rama]# tput cols
+200
+[root@veena rama]# tput lines
+59
+[root@veena rama]# printf "%200s" ""
+                                                                                                                                                                     [root@veena rama]# printf "%200s" " " | tr " " "-"
+																				     
+---------------------------------------------------
