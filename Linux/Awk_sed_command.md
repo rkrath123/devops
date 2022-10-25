@@ -165,10 +165,10 @@ delete file content with backup
 veena6leaders.config.back
 ```
 
-```
 
 searching conntent with sed command
 -----------------------------------
+
 ```
 
 to search word in file
