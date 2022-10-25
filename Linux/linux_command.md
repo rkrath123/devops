@@ -511,9 +511,7 @@ shell script
 [root@veena rama]# tput lines
 59
 [root@veena rama]# printf "%200s" ""
-                                                                                                                                                                     [root@veena rama]# printf "%200s" " " | tr " " "-"
-```
-```
----------------------------------------------------
-
+                                                                                                                                                                     [root@veena rama]# printf "%200s" " " | tr " " "*"
+	****************************																			     
+																				     
 ```
