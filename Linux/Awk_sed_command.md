@@ -74,4 +74,32 @@ operator:x:11:0:operator:/root:/sbin/nologin
 ![image](https://user-images.githubusercontent.com/53966749/197749922-36872e43-3c41-4e59-8e79-80021d52f4c7.png)
 
 
+Define variable inside awk
+--------------------------
+```
+[root@veena ~]# cat /etc/passwd | awk -v x=5 '{print $0, x}'
+root:x:0:0:root:/root:/bin/bash 5
+bin:x:1:1:bin:/bin:/sbin/nologin 5
 
+Reading variable value from command:
+
+[root@veena ~]# echo "2 6" | awk '{ print "a="$1 , "b="$2'}
+a=2 b=6
+
+
+```
+Reading variable for AWK
+------------------------
+```
+[root@veena ~]# echo "2 6" | awk '{ x=$1 ;y=$2 ;print x+y}'
+8
+
+[root@veena ~]# a=6
+[root@veena ~]# b=2
+[root@veena ~]#  awk -v x=$a -v y=$b 'BEGIN {print x+y}'
+8
+[root@veena ~]#
+
+```
+![image](https://user-images.githubusercontent.com/53966749/197756578-19469859-1a13-42c3-b6e8-f330f0015fa2.png)
+![image](https://user-images.githubusercontent.com/53966749/197756701-b1d3db8a-7eba-48d9-b297-9fc1df51531b.png)
