@@ -512,7 +512,8 @@ shell script
 59
 [root@veena rama]# printf "%200s" ""
                                                                                                                                                                      [root@veena rama]# printf "%200s" " " | tr " " "-"
-																				     
+```
+```
 ---------------------------------------------------
 
 ```
