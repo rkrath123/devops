@@ -489,6 +489,7 @@ Printf command
 both printf and echo used display string or values of variable
 echo sends newline at the end of o/p but no way to send and EOF in printf
 
+```
 [root@veena rama]# echo "shell script"
 shell script
 [root@veena rama]# printf "shell script"
@@ -513,3 +514,4 @@ shell script
                                                                                                                                                                      [root@veena rama]# printf "%200s" " " | tr " " "-"
 																				     
 ---------------------------------------------------
+```
