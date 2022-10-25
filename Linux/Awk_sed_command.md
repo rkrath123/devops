@@ -63,5 +63,13 @@ Number of line:4 Number of field: 7
 /sbin/shutdown
 /sbin/halt
 
+[root@veena rama]# cat /etc/passwd | awk -F ':' ' /root/ {print $0}'
+root:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/root:/sbin/nologin
 
 ```
+![image](https://user-images.githubusercontent.com/53966749/197749780-e2c922be-1bd3-4724-a8e9-688c7f635cca.png)
+![image](https://user-images.githubusercontent.com/53966749/197749922-36872e43-3c41-4e59-8e79-80021d52f4c7.png)
+
+
+
