@@ -538,3 +538,32 @@ my_string=Shell scripting number=5 float=7.890000
 
 ![image](https://user-images.githubusercontent.com/53966749/197708863-83e9b715-3045-4d9a-bc79-8f99c386c5f4.png)
 
+```
+[root@veena rama]# printf "%5d\n" "$x"
+    5
+[root@veena rama]# printf "%07d\n" "$x"
+0000005
+
+[root@veena rama]# printf "%f\n" "$y"
+7.890000
+[root@veena rama]# printf "%0.2f\n" "$y"
+7.89
+
+[root@veena rama]# printf "%30f\n" "$y"
+                      7.890000
+[root@veena rama]# printf "%-30f\n" "$y"
+7.890000
+
+[root@veena rama]# p=40
+[root@veena rama]# printf  "%40f\n" "$y"
+                                7.890000
+[root@veena rama]# p=40
+[root@veena rama]# printf  "%*f\n" "$p" "$y"
+                                7.890000
+
+[root@veena rama]# p=70
+[root@veena rama]# printf "%${p}f\n"  "$y"
+                                                              7.890000
+[root@veena rama]#
+
+```
