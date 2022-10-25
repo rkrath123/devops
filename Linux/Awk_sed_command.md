@@ -113,4 +113,54 @@ SED command
 ![image](https://user-images.githubusercontent.com/53966749/197761051-6cb75fc9-7f23-4087-97c8-c90ec0fb4686.png)
 
 
+![image](https://user-images.githubusercontent.com/53966749/197805419-967fe5e8-d13a-466c-910d-f826207155ad.png)
 
+Practical
+-----------
+```
+to view file with sed
+
+[root@veena ~]# sed ' ' veena6leaders.config
+or
+sed -n 'p' veena6leaders.config
+
+3rd line number will print
+[root@veena rama]# sed -n '3p' veena6leaders.config
+#temponame=mgmtsw0, mgmt_net_name=head, mgmt_net_macs="2c:23:3a:33:24:f9", mgmt_net_interfaces="eth0", transport=udpcast, redundant_mgmt_network=yes, net=head/head-bmc, type=spine, ice=no, console_device=ttyS1, architecture=x86_64
+[root@veena rama]#
+
+to print last line
+[root@veena rama]# sed -n '$p' veena6leaders.config
+image_types=default
+
+to print 3rd line to 10th line
+sed -n '3,10p' veena6leaders.config
+
+to print from 3rd to till 10th line
+[root@veena rama]# sed -n "3,+7p" veena6leaders.config
+
+it will print from 1, then 4, then 7 ,then 10 so on
+[root@veena rama]# sed -n "1~3p" veena6leaders.config
+
+to delete line and display
+
+[root@veena rama]# sed  '3,$d' veena6leaders.config
+[discover]
+#Switch
+
+to delete from file
+[root@veena rama]# sed  -i '3,$d' veena6leaders.config
+[root@veena rama]# vi veena6leaders.config
+[root@veena rama]# cat veena6leaders.config
+[discover]
+#Switch
+
+delete file content with backup
+[root@veena rama]# sed  -i.back '3,$d' veena6leaders.config
+[root@veena rama]# cat veena6leaders.config
+[discover]
+#Switch
+
+[root@veena rama]#ll 
+veena6leaders.config.back
+```
