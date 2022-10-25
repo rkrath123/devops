@@ -104,3 +104,13 @@ Arithimatic operation in  variable for AWK
 ```
 ![image](https://user-images.githubusercontent.com/53966749/197756578-19469859-1a13-42c3-b6e8-f330f0015fa2.png)
 ![image](https://user-images.githubusercontent.com/53966749/197756701-b1d3db8a-7eba-48d9-b297-9fc1df51531b.png)
+
+
+SED command
+===========
+
+![image](https://user-images.githubusercontent.com/53966749/197760856-ffaf1d8d-59d4-486a-ab00-889de2f5cc1a.png)
+![image](https://user-images.githubusercontent.com/53966749/197761051-6cb75fc9-7f23-4087-97c8-c90ec0fb4686.png)
+
+
+
