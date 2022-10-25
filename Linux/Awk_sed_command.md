@@ -12,10 +12,56 @@ active
 [root@veena rama]# awk 'NR==5 {print $2}' 1.txt
 active
 
+```
+![image](https://user-images.githubusercontent.com/53966749/197746395-64b83ba9-1620-4ad8-8303-159e334264fc.png)
+```
+
 [root@veena rama]# cat /etc/passwd | awk -F ':' '{print $1}'
 root
 bin
 daemon
 adm
 lp
+
+[root@veena rama]# cat /etc/passwd | awk '{print NR $1}'
+1root:x:0:0:root:/root:/bin/bash
+2bin:x:1:1:bin:/bin:/sbin/nologin
+3daemon:x:2:2:daemon:/sbin:/sbin/nologin
+4adm:x:3:4:adm:/var/adm:/sbin/nologin
+
+[root@veena rama]# cat /etc/passwd | awk '{print NR }'
+1
+2
+3
+4
+..
+..
+72
+
+NF means number of fileld
+[root@veena rama]# cat /etc/passwd | awk -F ':' '{print NR,NF}'
+1 7
+2 7
+3 7
+4 7
+5 7
+6 7
+
+[root@veena rama]# cat /etc/passwd | awk -F ':' '{print  "Number of line:"NR,"Number of field:",NF}'
+Number of line:1 Number of field: 7
+Number of line:2 Number of field: 7
+Number of line:3 Number of field: 7
+Number of line:4 Number of field: 7
+
+[root@veena rama]# cat /etc/passwd | awk -F ':' '{print $NF}'
+/bin/bash
+/sbin/nologin
+/sbin/nologin
+/sbin/nologin
+/sbin/nologin
+/bin/sync
+/sbin/shutdown
+/sbin/halt
+
+
 ```
