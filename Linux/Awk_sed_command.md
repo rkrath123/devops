@@ -164,3 +164,41 @@ delete file content with backup
 [root@veena rama]#ll 
 veena6leaders.config.back
 ```
+
+```
+
+searching conntent with sed command
+-----------------------------------
+
+to search word in file
+[root@veena rama]# sed -n '/admin_mgmt_interfaces/p' veena6leaders.config
+admin_mgmt_interfaces="ens2f0,ens2f0"
+
+multiple search in file
+[root@veena rama]# sed -n -e '/admin_mgmt_interfaces/p' -e '/admin_house_interface/p' veena6leaders.config
+admin_house_interface=eno1
+admin_mgmt_interfaces="ens2f0,ens2f0"
+
+[root@veena rama]# var="admin_mgmt_interfaces"
+[root@veena rama]# sed -n "/$var/p" veena6leaders.config
+admin_mgmt_interfaces="ens2f0,ens2f0"
+[root@veena rama]# sed -n '/$var/p' veena6leaders.config
+ no o/p with single quatation
+ 
+ to delete 10th line to 15th line
+ [root@veena rama]#  sed '10,15d' veena6leaders.config
+
+
+to delete 10th to last line
+[root@veena rama]#  sed '10,15d' veena6leaders.config
+
+to delete search word line
+[root@veena rama]#  sed '/service/d' veena6leaders.config
+
+to delete others than search word line
+[root@veena rama]#  sed '/service/!d' veena6leaders.config
+
+to delete others than search word line in file
+[root@veena rama]#  sed -i '/service/!d' veena6leaders.config
+
+```
