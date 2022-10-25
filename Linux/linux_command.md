@@ -567,3 +567,5 @@ my_string=Shell scripting number=5 float=7.890000
 [root@veena rama]#
 
 ```
+
+![image](https://user-images.githubusercontent.com/53966749/197714398-d34b82f8-9061-40dc-bb73-64443456a241.png)
