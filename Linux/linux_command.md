@@ -486,6 +486,8 @@ total 44K
 ```
 Printf command
 ---------------
+![image](https://user-images.githubusercontent.com/53966749/197706730-75aa2435-64b0-43e0-a1d7-e63769b3940c.png)
+
 both printf and echo used display string or values of variable
 echo sends newline at the end of o/p but no way to send and EOF in printf
 
@@ -512,6 +514,27 @@ shell script
 59
 [root@veena rama]# printf "%200s" ""
                                                                                                                                                                      [root@veena rama]# printf "%200s" " " | tr " " "*"
-	****************************																			     
-																				     
+	****************************																
+	
+![image](https://user-images.githubusercontent.com/53966749/197708700-87a31067-afb5-4d91-8edc-ae027f7ff747.png)
+
+
+[root@veena rama]# x=5
+[root@veena rama]# y=7.890
+[root@veena rama]# printf "%d %f\n" $x $y
+5 7.890000
+
+[root@veena rama]# my_name="Shell scripting"
+[root@veena rama]# printf "%s %d %f\n" "$my_name"  "$x" "$y"
+Shell scripting 5 7.890000
+[root@veena rama]#
+
+[root@veena rama]# printf "my_string=%s number=%d float=%f\n" "$my_name"  "$x" "$y"
+my_string=Shell scripting number=5 float=7.890000
+[root@veena rama]#
+
+
 ```
+
+![image](https://user-images.githubusercontent.com/53966749/197708863-83e9b715-3045-4d9a-bc79-8f99c386c5f4.png)
+
