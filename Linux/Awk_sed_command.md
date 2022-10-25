@@ -191,7 +191,7 @@ admin_mgmt_interfaces="ens2f0,ens2f0"
 
 
 to delete 10th to last line
-[root@veena rama]#  sed '10,15d' veena6leaders.config
+[root@veena rama]#  sed '10,$d' veena6leaders.config
 
 to delete search word line
 [root@veena rama]#  sed '/service/d' veena6leaders.config
