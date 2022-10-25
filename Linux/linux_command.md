@@ -515,10 +515,10 @@ shell script
 [root@veena rama]# printf "%200s" ""
                                                                                                                                                                      [root@veena rama]# printf "%200s" " " | tr " " "*"
 	****************************																
-	
+```
 ![image](https://user-images.githubusercontent.com/53966749/197708700-87a31067-afb5-4d91-8edc-ae027f7ff747.png)
 
-
+```
 [root@veena rama]# x=5
 [root@veena rama]# y=7.890
 [root@veena rama]# printf "%d %f\n" $x $y
