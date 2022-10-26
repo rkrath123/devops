@@ -374,6 +374,12 @@ Regex Part-2
 ![image](https://user-images.githubusercontent.com/53966749/197983862-a1bf1694-4f2b-4787-b390-4d97d4410a25.png)
 
 
+Regex part-3
+-------------
+![image](https://user-images.githubusercontent.com/53966749/198002767-dd514565-d760-457d-ab9b-3ef37f8fd70e.png)
+![image](https://user-images.githubusercontent.com/53966749/198003038-9117bdb7-ea4e-4620-86a9-6d8621f4ed97.png)
+![image](https://user-images.githubusercontent.com/53966749/198003196-3e144e1d-80f3-4fd6-88c1-f4464e2e465d.png)
+
 
 
 
