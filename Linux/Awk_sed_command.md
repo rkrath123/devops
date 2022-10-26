@@ -232,3 +232,11 @@ root:x:0:0:root:/root:/bin/bash
 cfhill:~/test # sed   '/root/s/bash/ksh/g' passwd | head -1
 root:x:0:0:root:/root:/bin/ksh
 ```
+Insertion and deletetion of sed command
+-------------------------------------
+
+![image](https://user-images.githubusercontent.com/53966749/197941462-d60e62cc-a64f-4c23-abd4-34eeac53d8b4.png)
+![image](https://user-images.githubusercontent.com/53966749/197941685-32387428-bc51-46d7-b405-727757db2fb2.png)
+![image](https://user-images.githubusercontent.com/53966749/197941936-f5ce009c-ad34-4c3d-b53e-43b93112aa04.png)
+
+
