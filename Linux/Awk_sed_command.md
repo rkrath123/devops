@@ -203,3 +203,32 @@ to delete others than search word line in file
 [root@veena rama]#  sed -i '/service/!d' veena6leaders.config
 
 ```
+Find and Replace with SED command
+-----------------------------------
+
+![image](https://user-images.githubusercontent.com/53966749/197939196-c26cb018-eade-49ed-a846-610fc8892245.png)
+
+practical
+---------
+```
+cfhill:~/test # sed 's/root/udemy/g' passwd
+
+to replace in file:
+cfhill:~/test # sed  -i.back 's/root/udemy/g' passwd
+
+replace 2nd same word in a line 
+
+cfhill:~/test # sed  -i.back 's/root/udemy/2' passwd
+cfhill:~/test # cat passwd | head -1
+root:x:0:0:udemy:/root:/bin/bash
+
+cfhill:~/test # cat passwd | head -1
+root:x:0:0:root:/root:/bin/bash
+
+search keyword  root and in that change shell from bash to ksh
+cfhill:~/test # cat passwd | head -1
+root:x:0:0:root:/root:/bin/bash
+
+cfhill:~/test # sed   '/root/s/bash/ksh/' passwd | head -1
+root:x:0:0:root:/root:/bin/ksh
+```
