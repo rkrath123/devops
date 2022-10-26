@@ -364,4 +364,16 @@ this \s in the line
 this    is tab  line
 this on more thiss line
 ```
+Regex Part-2
+--------------
+![image](https://user-images.githubusercontent.com/53966749/197983124-b3ab006c-0532-460e-b547-2d18f5814794.png)
+![image](https://user-images.githubusercontent.com/53966749/197983281-5df2565c-2f70-40e7-bbe5-c85e60e4fa01.png)
+![image](https://user-images.githubusercontent.com/53966749/197983465-9a7386c9-901d-4987-a5c6-4f62a1cf096c.png)
+![image](https://user-images.githubusercontent.com/53966749/197983609-952645b1-f561-4756-b4d1-083c30bedfd1.png)
+![image](https://user-images.githubusercontent.com/53966749/197983680-4cc9529a-9a9d-4ee1-be95-74530f9e9be7.png)
+![image](https://user-images.githubusercontent.com/53966749/197983862-a1bf1694-4f2b-4787-b390-4d97d4410a25.png)
+
+
+
+
 
