@@ -239,4 +239,129 @@ Insertion and deletetion of sed command
 ![image](https://user-images.githubusercontent.com/53966749/197941685-32387428-bc51-46d7-b405-727757db2fb2.png)
 ![image](https://user-images.githubusercontent.com/53966749/197941936-f5ce009c-ad34-4c3d-b53e-43b93112aa04.png)
 
+Regex
+------
+
+![image](https://user-images.githubusercontent.com/53966749/197968276-67ed3151-3236-4c8a-81e0-6691ece6a350.png)
+
+```
+special character \s \t. * \+ \? and \
+
+cfhill:~/test # sed -n '/put/p' 1.txt
+this is put sdfw
+
+cfhill:~/test # sed -n '/p[uo]t/p' 1.txt
+this is put sdfw
+this is pot sdfw
+
+Print line which having space
+
+cfhill:~/test # sed -n '/\s/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+this is pythhhh sdfw
+t bm klkk
+cfhill:~/test #
+
+
+cfhill:~/test # sed -n '/\\s/p' 1.txt
+this \s in the line
+
+to print  tab line
+cfhill:~/test # sed -n '/\t/p' 1.txt
+this    is tab  line
+
+print p with any character t 
+
+
+cfhill:~/test # sed -n '/p.t/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+this is pythhhh sdfw
+thisispot
+
+lokking for line having starting space with word p.t 
+cfhill:~/test # sed -n '/\sp.t/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+this is pythhhh sdfw
+
+lokking for line having starting and ending with  space with word p.t 
+cfhill:~/test # sed -n '/\sp.t\s/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+
+to print . line
+cfhill:~/test # sed -n '/\./p' 1.txt
+. * \+ \?
+
+
+
+to print line with this word
+cfhill:~/test # sed -n '/this/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+this is pythhhh sdfw
+this \s in the line
+this    is tab  line
+thisispot
+thisssss
+this on more thiss line
+
+
+this*=> s* means s is 0 time or many time 
+cfhill:~/test # sed -n '/this*/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+this is pythhhh sdfw
+this \s in the line
+this    is tab  line
+thisispot
+thisssss
+thi
+this on more thiss line
+
+this\+ =>s\+ means 1 or mnay time 
+cfhill:~/test # sed -n '/this\+/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+this is pythhhh sdfw
+this \s in the line
+this    is tab  line
+thisispot
+thisssss
+this on more thiss line
+
+starting space and ending space in between this => s must be 1 or many times
+cfhill:~/test # sed -n '/\sthis\+\s/p' 1.txt
+this on more thiss line
+
+cfhill:~/test # sed -n '/this\?/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+this is pythhhh sdfw
+this \s in the line
+this    is tab  line
+thisispot
+thisssss
+thi
+this on more thiss line
+cfhill:~/test #
+cfhill:~/test # sed -n '/this\?\s/p' 1.txt
+this is put sdfw
+this is pot sdfw
+this is pit sdfw
+this is pythhhh sdfw
+this \s in the line
+this    is tab  line
+this on more thiss line
+```
 
