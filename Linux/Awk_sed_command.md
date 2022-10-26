@@ -229,6 +229,6 @@ search keyword  root and in that change shell from bash to ksh
 cfhill:~/test # cat passwd | head -1
 root:x:0:0:root:/root:/bin/bash
 
-cfhill:~/test # sed   '/root/s/bash/ksh/' passwd | head -1
+cfhill:~/test # sed   '/root/s/bash/ksh/g' passwd | head -1
 root:x:0:0:root:/root:/bin/ksh
 ```
