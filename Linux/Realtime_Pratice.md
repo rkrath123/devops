@@ -2,6 +2,7 @@ Design simple digital clock
 ==========================
 
 ![image](https://user-images.githubusercontent.com/53966749/198026268-2b5e2111-8074-4834-bc6a-51554ceb8b37.png)
+
 ![image](https://user-images.githubusercontent.com/53966749/198026522-e45fd7bc-ca2d-4681-8b3b-84c00b9ebe6a.png)
 
 Automate Server Inventory using Shell Script
