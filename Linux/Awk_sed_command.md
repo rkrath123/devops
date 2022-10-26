@@ -380,6 +380,9 @@ Regex part-3
 ![image](https://user-images.githubusercontent.com/53966749/198003038-9117bdb7-ea4e-4620-86a9-6d8621f4ed97.png)
 ![image](https://user-images.githubusercontent.com/53966749/198003196-3e144e1d-80f3-4fd6-88c1-f4464e2e465d.png)
 
+![image](https://user-images.githubusercontent.com/53966749/198004745-6d6ec3fd-1c66-4b8b-ae94-6feeab1df5d0.png)
+![image](https://user-images.githubusercontent.com/53966749/198006540-b040b978-8194-4ea1-ac6f-978282e41394.png)
+![image](https://user-images.githubusercontent.com/53966749/198006698-b95ba91c-bc7b-4294-8323-76fb063cfad8.png)
 
 
 
