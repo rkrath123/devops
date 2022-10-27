@@ -271,6 +271,7 @@ root@ubuntu-3:~# ansible rhel:sles -m ping
 root@ubuntu-3:~#
 
 group of group :
+--------------
 /etc/ansible/hosts
 [ubuntu]
 10.103.17.30
