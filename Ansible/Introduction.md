@@ -315,3 +315,57 @@ https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.
 
 ```
 
+Different location of ansible.cfg with priority
+------------------------------------------------
+
+![image](https://user-images.githubusercontent.com/53966749/198316427-4a185910-2256-4538-82f3-14ac963e59a4.png)
+```
+root@ubuntu-3:~# mkdir mydir
+root@ubuntu-3:~# cp -rp /etc/ansible/* mydir
+root@ubuntu-3:~# ansible --version
+ansible 2.9.6
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 3.8.10 (default, Jun 22 2022, 20:18:18) [GCC 9.4.0]
+root@ubuntu-3:~# cd mydir
+root@ubuntu-3:~/mydir#
+root@ubuntu-3:~/mydir# ll
+total 32
+drwxr-xr-x  2 root root  4096 Oct 27 14:26 ./
+drwx------ 13 root root  4096 Oct 27 14:26 ../
+-rw-r--r--  1 root root 19984 Oct 27 12:17 ansible.cfg
+-rw-r--r--  1 root root  1098 Oct 27 12:34 hosts
+root@ubuntu-3:~/mydir# ansible --version
+ansible 2.9.6
+  config file = /root/mydir/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 3.8.10 (default, Jun 22 2022, 20:18:18) [GCC 9.4.0]
+  
+root@ubuntu-3:~/mydir# rm -rf *
+
+root@ubuntu-3:~/mydir#  ansible --version
+ansible 2.9.6
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 3.8.10 (default, Jun 22 2022, 20:18:18) [GCC 9.4.0]
+root@ubuntu-3:~/mydir#
+root@ubuntu-3:~/mydir# cd ~
+root@ubuntu-3:~# touch .ansible.cfg
+root@ubuntu-3:~# cd mydir/
+root@ubuntu-3:~/mydir# ls
+root@ubuntu-3:~/mydir# ansible --version
+ansible 2.9.6
+  config file = /root/.ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 3.8.10 (default, Jun 22 2022, 20:18:18) [GCC 9.4.0]
+root@ubuntu-3:~/mydir#
+
+```
