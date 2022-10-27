@@ -125,3 +125,56 @@ Change ansible directory
 Provide external hostfile path during runtime
 ============================================
 ![image](https://user-images.githubusercontent.com/53966749/198281283-1223ec43-1c15-41df-a2b9-323f457c208d.png)
+
+Disable hostkey checking in ansible
+===================================
+```
+[root@sudha testware-ansible]# cat /etc/ansible/ansible.cfg | grep host_key
+#host_key_checking = False
+#record_host_keys=False
+
+[root@sudha testware-ansible]# vi /etc/ansible/ansible.cfg
+[root@sudha testware-ansible]# cat /etc/ansible/ansible.cfg | grep host_key
+host_key_checking = False
+#record_host_keys=False
+
+[root@sudha testware-ansible]# ansible all -m ping
+[WARNING]: Platform linux on host 10.103.16.112 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+10.103.16.112 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.16.46 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.17.24 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.17.30 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.16.208 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+```
