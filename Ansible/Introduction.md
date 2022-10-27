@@ -122,3 +122,6 @@ Change ansible directory
 ![image](https://user-images.githubusercontent.com/53966749/198279646-b1df8b69-1256-4dfa-8542-fbaa775ca754.png)
 ![image](https://user-images.githubusercontent.com/53966749/198279820-26ce8abd-865c-4c75-bd75-451c1121ad8e.png)
 
+Provide external hostfile path during runtime
+============================================
+![image](https://user-images.githubusercontent.com/53966749/198281283-1223ec43-1c15-41df-a2b9-323f457c208d.png)
