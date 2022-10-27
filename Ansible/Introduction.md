@@ -107,7 +107,8 @@ root@ubuntu-3:~#
 
 
 ```
-to change default ansible host directory
+to change default ansible host file
+===================================
 
  vi /etc/ansible/ansible.cfg
  
