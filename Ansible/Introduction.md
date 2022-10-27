@@ -243,6 +243,7 @@ root@ubuntu-3:~# ansible rhel -m ping
 
 
 to work with rhel and sles server
+---------------------------------
 
 root@ubuntu-3:~# ansible rhel:sles -m ping
 10.103.16.46 | SUCCESS => {
