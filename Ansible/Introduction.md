@@ -108,7 +108,9 @@ root@ubuntu-3:~#
 
 ```
 to change default ansible host directory
+
  vi /etc/ansible/ansible.cfg
+ 
  ![image](https://user-images.githubusercontent.com/53966749/198271439-0813beb3-aef9-4d87-b163-867fc7f337f6.png)
  ![image](https://user-images.githubusercontent.com/53966749/198271519-aea7081d-056d-4dec-80bc-c2e6dcccbc50.png)
 
