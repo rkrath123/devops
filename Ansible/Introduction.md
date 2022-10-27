@@ -1,6 +1,9 @@
 Ansible Architecure
 ===================
 ![image](https://user-images.githubusercontent.com/53966749/198248261-672ddc63-a025-4b0e-9c52-5b8bdfd586eb.png)
+![image](https://user-images.githubusercontent.com/53966749/198255050-27ec1201-af6d-4132-a88e-42f0e487b15d.png)
+![image](https://user-images.githubusercontent.com/53966749/198255411-7d83030c-cb50-4b5b-8884-6b6944f92c0e.png)
+
 
 ```
 root@ubuntu-3:~# ansible --version
