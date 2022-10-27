@@ -178,3 +178,138 @@ https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.
 }
 
 ```
+
+Ansible inventory files with groups
+==================================
+```
+root@ubuntu-3:~# ansible 10.103.16.112 -m ping
+[WARNING]: Platform linux on host 10.103.16.112 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+10.103.16.112 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+root@ubuntu-3:~#
+
+root@ubuntu-3:~# ansible all -m ping
+[WARNING]: Platform linux on host 10.103.16.112 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+10.103.16.112 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.16.46 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+
+root@ubuntu-3:~# cat /etc/ansible/hosts
+
+[ubuntu]
+10.103.17.30
+10.103.16.208
+
+[rhel]
+10.103.17.24
+10.103.16.46
+
+[sles]
+10.103.16.112
+root@ubuntu-3:~#
+
+root@ubuntu-3:~# ansible rhel -m ping
+10.103.16.46 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.17.24 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+
+to work with rhel and sles server
+
+root@ubuntu-3:~# ansible rhel:sles -m ping
+10.103.16.46 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.17.24 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+10.103.16.112 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+root@ubuntu-3:~#
+
+group of group :
+/etc/ansible/hosts
+[ubuntu]
+10.103.17.30
+10.103.16.208
+
+[rhel]
+10.103.17.24
+10.103.16.46
+
+[sles]
+10.103.16.112
+
+[db:children]
+rhel
+sles
+
+root@ubuntu-3:~# ansible db -m ping
+[WARNING]: Platform linux on host 10.103.16.112 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+10.103.16.112 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.16.46 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.17.24 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+```
+
