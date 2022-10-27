@@ -114,4 +114,10 @@ to change default ansible host directory
  ![image](https://user-images.githubusercontent.com/53966749/198271439-0813beb3-aef9-4d87-b163-867fc7f337f6.png)
  ![image](https://user-images.githubusercontent.com/53966749/198271519-aea7081d-056d-4dec-80bc-c2e6dcccbc50.png)
 
+Change ansible directory
+========================
+
+![image](https://user-images.githubusercontent.com/53966749/198279452-4882518c-1bfe-4457-9c41-a1b2a3447e70.png)
+![image](https://user-images.githubusercontent.com/53966749/198279646-b1df8b69-1256-4dfa-8542-fbaa775ca754.png)
+![image](https://user-images.githubusercontent.com/53966749/198279820-26ce8abd-865c-4c75-bd75-451c1121ad8e.png)
 
