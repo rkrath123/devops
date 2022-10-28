@@ -1,0 +1,95 @@
+Ad-hoc command
+================
+![image](https://user-images.githubusercontent.com/53966749/198668555-f534f46d-eab6-490b-a22c-a48d715811af.png)
+
+![image](https://user-images.githubusercontent.com/53966749/198668179-da21c652-ffb1-42da-a5db-006a717c08b5.png)
+```
+root@ubuntu-3:~# ansible rhel -m ping
+10.103.17.24 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+10.103.16.46 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/libexec/platform-python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+
+root@ubuntu-3:~# ansible all -m shell -a "uptime"
+10.103.17.30 | CHANGED | rc=0 >>
+ 14:47:52 up 32 days,  8:17,  1 user,  load average: 0.84, 0.31, 0.25
+10.103.16.208 | CHANGED | rc=0 >>
+ 14:47:45 up 33 days, 9 min,  1 user,  load average: 0.84, 0.65, 0.47
+[WARNING]: Platform linux on host 10.103.16.112 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+10.103.16.112 | CHANGED | rc=0 >>
+ 14:45:45  up 41 days 23:44,  1 user,  load average: 0.00, 0.00, 0.00
+10.103.16.46 | CHANGED | rc=0 >>
+ 10:47:42 up 45 days, 11:23,  1 user,  load average: 0.08, 0.05, 0.01
+10.103.17.24 | CHANGED | rc=0 >>
+ 10:47:45 up 41 days,  1:59,  1 user,  load average: 0.89, 0.68, 0.62
+root@ubuntu-3:~# ansible rhel -m shell -a "uptime"
+10.103.16.46 | CHANGED | rc=0 >>
+ 10:47:48 up 45 days, 11:23,  1 user,  load average: 0.07, 0.05, 0.01
+10.103.17.24 | CHANGED | rc=0 >>
+ 10:47:51 up 41 days,  2:00,  1 user,  load average: 0.82, 0.67, 0.61
+root@ubuntu-3:~#
+
+root@ubuntu-3:~# ansible rhel -m shell -a "free -m"
+10.103.16.46 | CHANGED | rc=0 >>
+              total        used        free      shared  buff/cache   available
+Mem:          11795        4311        2990         572        4492        6611
+Swap:             0           0           0
+10.103.17.24 | CHANGED | rc=0 >>
+              total        used        free      shared  buff/cache   available
+Mem:          11795        7783         527         526        3483        3214
+Swap:             0           0           0
+
+
+to change hostfile 
+-----------------
+
+root@ubuntu-3:~# cat myhost
+localhost
+
+root@ubuntu-3:~# ansible  all  -m ping -i myhost
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+root@ubuntu-3:~#
+
+list all modules
+----------------
+
+root@ubuntu-3:~# ansible-doc -l
+
+a10_server                                                    Manage A10 Networks AX/SoftAX/Thunder/vThunder devices' server object
+a10_server_axapi3                                             Manage A10 Networks AX/SoftAX/Thunder/vThunder devices
+a10_service_group                                             Manage A10 Networks AX/SoftAX/Thunder/vThunder devices' service groups
+a10_virtual_server                                            Manage A10 Networks AX/SoftAX/Thunder/vThunder devices' virtual servers
+aci_aaa_user                                                  Manage AAA users (aaa:User)
+aci_aaa_user_certificate                                      Manage AAA user certificates (aaa:UserCert)
+
+root@ubuntu-3:~# ansible-doc -l | grep shell
+shell                                                         Execute shell commands on targets
+vmware_vm_shell                                               Run commands in a VMware guest operating system
+win_shell                                                     Execute shell commands on target hosts
+
+root@ubuntu-3:~# ansible-doc shell
+> SHELL    (/usr/lib/python3/dist-packages/ansible/modules/commands/shell.py)
+
+        The `shell' module takes the command name followed by a list of space-delimited arguments. Either a free form command or `cmd' parameter is required,
+        see the examples. It is almost exactly like the [command] module but runs the command through a shell (`/bin/sh') on the remote node. For Windows
+        targets, use the [win_shell] module instead.
+```
+
