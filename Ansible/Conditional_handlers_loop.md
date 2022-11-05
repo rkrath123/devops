@@ -1,0 +1,93 @@
+Conditional Statements
+======================
+
+![image](https://user-images.githubusercontent.com/53966749/200108073-bcfc0c17-3d6f-4a14-a552-047d93d7e3f0.png)
+
+
+when
+-----
+![image](https://user-images.githubusercontent.com/53966749/200108243-66966b97-19d9-45fe-937e-17f0eeb0cce5.png)
+
+```
+==================================================================
+---
+  - name: simple usage 
+    hosts: localhost
+    gather_facts: false
+    vars:
+      x: 15
+      y: 9
+    tasks:
+      - debug:
+          msg: "The larger number of {{x}} and {{y}} is: {{x}}"
+        when: x > y
+      - debug:
+          msg: "The large number of {{x}} and {{y}} is: {{y}}"
+        when: y > x
+        
+ o/p-
+ root@ubuntu-3:~/test# ansible-playbook when.yml
+
+PLAY [simple usage] **************************************************************************************************************************************************************************************
+
+TASK [debug] *********************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "The larger number of 15 and 9 is: 15"
+}
+
+TASK [debug] *********************************************************************************************************************************************************************************************
+skipping: [localhost]
+
+PLAY RECAP ******************************************************************************************************************
+
+
+ =================================================================       
+---
+  - name: SImple play to install httpd
+    hosts: web_servers
+    gather_facts: true
+    #become: yes
+    tasks:
+      - name: Installing httpd using yum
+        yum:
+          name: httpd
+          state: present
+        when: ansible_distribution != "Ubuntu"
+      - name: Istalling apache2 using apt
+        apt:
+          name: apache2
+          state: present
+        when: ansible_distribution == "Ubuntu"
+        
+```
+Inline conditional statement
+=============================
+```
+---
+  - name: simple usage of inline conditional statement ( if else)
+    hosts: localhost
+    gather_facts: false
+    vars:
+      x: 155
+      y: 19
+      larger: "{{ x if ( x > y) else (y)}}"
+    tasks:
+      - debug:
+          msg: "The larger number of {{x}} and {{y}} is: {{larger}}"
+    
+    root@ubuntu-3:~/test# ansible-playbook large.yml
+
+PLAY [simple usage of inline conditional statement ( if else)] *******************************************************************************************************************************************
+
+TASK [debug] *********************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "The larger number of 155 and 19 is: 155"
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************
+localhost                  : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+```
+    
+   
