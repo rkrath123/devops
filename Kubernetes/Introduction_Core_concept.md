@@ -477,3 +477,74 @@ Dpckerfile
 ![image](https://user-images.githubusercontent.com/53966749/200167168-44464ab0-11b3-429e-97de-f4882721da21.png)
 
 
+Exposing Ports for Pods
+========================
+```
+sles15sp3:~ # cat 1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+     name: nginxwebserver
+spec:
+  containers:
+     -    image: nginx
+          name: democontainer
+          ports:
+            - containerPort: 8080
+
+sles15sp3:~ # kubectl apply -f 1.yaml
+pod/nginxwebserver created
+
+sles15sp3:~ # kubectl get pods
+NAME             READY   STATUS    RESTARTS   AGE
+nginxwebserver   1/1     Running   0          17s
+
+sles15sp3:~ # kubectl describe pod nginxwebserver
+Name:         nginxwebserver
+Namespace:    default
+Priority:     0
+Node:         gke-cluster-1-default-pool-37115ec3-0z9n/10.128.0.30
+Start Time:   Sun, 06 Nov 2022 11:15:00 +0000
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           10.8.0.19
+IPs:
+  IP:  10.8.0.19
+Containers:
+  democontainer:
+    Container ID:   containerd://a1b89925423bf74be925859cf18a584924066d46133bd4f6a24be9688fec3b0f
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:943c25b4b66b332184d5ba6bb18234273551593016c0e0ae906bab111548239f
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sun, 06 Nov 2022 11:15:01 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-tt2zr (ro)
+```
+
+Generating pod manifests via CLI
+=================================
+```
+1. Create a Pod from Nginx Image
+kubectl run nginx --image=nginx
+
+kubectl get pods
+
+2. Create a Pod and Expose a Port
+kubectl run nginx-port --image=nginx --port=80
+kubectl describe pod nginx-port
+
+3. Output the Manifest File
+kubectl run nginx --image=nginx --port=80 --dry-run=client -o yaml
+
+4. Delete PODS
+kubectl delete pod nginx
+
+kubectl delete pod --all
+
+```
