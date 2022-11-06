@@ -98,5 +98,18 @@ etcd
 ![image](https://user-images.githubusercontent.com/53966749/200156262-dfa2f702-a634-4d9f-a102-5f952cd30be9.png)
 ![image](https://user-images.githubusercontent.com/53966749/200156279-63337e0f-dfc0-4660-b13d-96acec090189.png)
 
+kube-apiserver
+==============
+
+![image](https://user-images.githubusercontent.com/53966749/200156362-75e9b271-2450-4a32-8320-0d0af344f4a9.png)
+![image](https://user-images.githubusercontent.com/53966749/200156377-85104850-c5c4-425e-8cc4-6ffafb3f8861.png)
+![image](https://user-images.githubusercontent.com/53966749/200156390-31e1c1de-566f-426c-a2e1-56fb47a83647.png)
+
+![image](https://user-images.githubusercontent.com/53966749/200156456-d0089fc8-e02e-45ef-86d8-e94a916f2d54.png)
+![image](https://user-images.githubusercontent.com/53966749/200156472-8e5943e5-9a1c-41ad-8f89-e903a3b42111.png)
+![image](https://user-images.githubusercontent.com/53966749/200156552-315a2d99-2840-424a-9474-a70ecf8f3a57.png)
+
+
+
 
 
