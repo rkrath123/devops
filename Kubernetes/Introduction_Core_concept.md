@@ -176,6 +176,32 @@ FIELDS:
      https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
      
  
+sles15sp3:~ # kubectl explain pod.spec.containers
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: containers <[]Object>
+
+DESCRIPTION:
+     List of containers belonging to the pod. Containers cannot currently be
+     added or removed. There must be at least one container in a Pod. Cannot be
+     updated.
+
+     A single application container that you want to run within a pod.
+
+FIELDS:
+   args <[]string>
+     Arguments to the entrypoint. The docker image's CMD is used if this is not
+     provided. Variable references $(VAR_NAME) are expanded using the
+     container's environment. If a variable cannot be resolved, the reference in
+     the input string will be unchanged. Double $$ are reduced to a single $,
+     which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
+     produce the string literal "$(VAR_NAME)". Escaped references will never be
+     expanded, regardless of whether the variable exists or not. Cannot be
+     updated. More info:
+     https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+
+
   
 ```
 Multicontainer pods
@@ -334,6 +360,120 @@ sles15sp3:~/dockerfile # docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS          PORTS     NAMES
 
 ```
+Overview of command and arguments
+====================================
+![image](https://user-images.githubusercontent.com/53966749/200164062-607227ae-747b-416e-bea3-1496f87c9740.png)
+![image](https://user-images.githubusercontent.com/53966749/200164130-fbc8cf69-c216-4b2c-bd45-119c1ffb6edd.png)
 
+![image](https://user-images.githubusercontent.com/53966749/200166059-4fc1256c-e718-4518-95f2-8578e465341f.png)
+![image](https://user-images.githubusercontent.com/53966749/200166073-946a3cff-c692-4a92-b893-9cf19761807d.png)
+![image](https://user-images.githubusercontent.com/53966749/200166120-3a256391-68ea-4c9e-aef7-4329494a1bd5.png)
+
+
+```
+Create POD without any commands or arguments.
+-------------------------------------------
+sles15sp3:~ # cat busybox.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command
+spec:
+  containers:
+  -  name: busybox
+     image: busybox
+
+sles15sp3:~ # kubectl apply  -f busybox.yaml
+pod/command created
+
+sles15sp3:~ # kubectl get pods
+NAME      READY   STATUS      RESTARTS      AGE
+command   0/1     Completed   2 (21s ago)   23s
+
+sles15sp3:~ # kubectl exec -it command -- sh
+error: unable to upgrade connection: container not found ("busybox")
+
+
+Create POD with Command
+---------------------------
+sles15sp3:~ # cat busybox.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command2
+spec:
+  containers:
+  -  image: count
+     name: busybox
+     command: ["sleep","3600"]
+
+sles15sp3:~ # cat busybox.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command2
+spec:
+  containers:
+  -  name: count
+     image: busybox
+     command: ["sleep","3600"]
+sles15sp3:~ # kubectl apply -f busybox.yaml
+pod/command2 created
+sles15sp3:~ # kubectl get pods
+NAME       READY   STATUS    RESTARTS   AGE
+command2   1/1     Running   0          9s
+sles15sp3:~ # kubectl exec -it command2 -- sh
+/ # ps
+PID   USER     TIME  COMMAND
+    1 root      0:00 sleep 3600
+    7 root      0:00 sh
+   13 root      0:00 ps
+/ # exit
+
+Create POD with Command and Arguments
+------------------------------------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command3
+spec:
+  containers:
+  -  name: count
+     image: busybox
+     command: ["sleep"]
+     args: ["3600"]
+     
+     
+```
+
+Image entrypoint and CMD
+=========================
+case-1
+------
+![image](https://user-images.githubusercontent.com/53966749/200166525-05c44d14-b678-4a03-9d05-3c36e3fa8685.png)
+
+case-2
+------
+![image](https://user-images.githubusercontent.com/53966749/200166564-ce933376-4976-4c4c-a705-3f147f0bc6ed.png)
+
+case-3
+------
+![image](https://user-images.githubusercontent.com/53966749/200166634-9d8540d5-3c7b-42a0-9db3-1013cbf1331a.png)
+
+case-4
+-------
+![image](https://user-images.githubusercontent.com/53966749/200166654-45b58a8e-1e3d-4505-b308-acf22aec0114.png)
+
+Expose in Docker
+================
+![image](https://user-images.githubusercontent.com/53966749/200166949-06f1b89f-c9ce-490f-b915-2772676ad54d.png)
+![image](https://user-images.githubusercontent.com/53966749/200166994-5cee28e3-d8a6-4001-bad1-cc5f03009325.png)
+![image](https://user-images.githubusercontent.com/53966749/200167035-844a0906-aa77-4ea9-922b-907aff4f8290.png)
+
+Dpckerfile
+
+![image](https://user-images.githubusercontent.com/53966749/200167065-d03ee35f-5823-457b-85f2-b7e51547eea8.png)
+![image](https://user-images.githubusercontent.com/53966749/200167148-189ad970-936d-417b-bbb5-f827b7f5ae0b.png)
+![image](https://user-images.githubusercontent.com/53966749/200167168-44464ab0-11b3-429e-97de-f4882721da21.png)
 
 
