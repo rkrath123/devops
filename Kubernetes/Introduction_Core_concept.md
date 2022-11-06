@@ -9,13 +9,13 @@ Introduction
 ![image](https://user-images.githubusercontent.com/53966749/200154757-1138c9a4-6ee8-4a9c-aeb1-5075cbe1a4ac.png)
 
 Kubectl
--------
+=========
 
 ![image](https://user-images.githubusercontent.com/53966749/200155214-eaca9892-59ed-4dfb-9781-4ef488202747.png)
 ![image](https://user-images.githubusercontent.com/53966749/200155242-634ff5f4-e7b4-4f4f-9d77-38ff38323fa7.png)
 
 Docker vs Kubernetes
---------------------
+====================
 
 ![image](https://user-images.githubusercontent.com/53966749/200155364-8d09e5c1-2afa-4e0a-acfe-e60b69bd635a.png)
 ![image](https://user-images.githubusercontent.com/53966749/200155384-d5c1f995-efed-477e-9477-e931f7fb0e28.png)
@@ -53,6 +53,50 @@ Pod
 ![image](https://user-images.githubusercontent.com/53966749/200155637-15d4b33f-6ca4-42e7-b9f7-d08dcdea578d.png)
 ![image](https://user-images.githubusercontent.com/53966749/200155645-cf585510-f13b-4061-9f74-8eaa57ae33cd.png)
 
+
+
+Kubernetes object
+=================
+![image](https://user-images.githubusercontent.com/53966749/200155772-3ed99e10-d09c-43fc-b488-22f5e5aa0360.png)
+![image](https://user-images.githubusercontent.com/53966749/200155788-63712cd9-9b55-447f-9f51-d66d26a5d3ee.png)
+![image](https://user-images.githubusercontent.com/53966749/200156052-055fd324-b304-4f36-b2e2-10bb66545064.png)
+![image](https://user-images.githubusercontent.com/53966749/200156068-54f218d2-9286-4fca-97ea-09f71f1c9e9e.png)
+
+```
+sles15sp3:~ # cat 1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginxwebserver
+spec:
+  containers:
+     -    image: nginx
+          name: democontainer
+          
+          
+sles15sp3:~ # kubectl apply -f 1.yaml
+pod/nginxwebserver created
+
+sles15sp3:~ # kubectl get pods
+NAME             READY   STATUS    RESTARTS   AGE
+nginx            1/1     Running   0          22m
+nginxwebserver   1/1     Running   0          107s
+sles15sp3:~ #
+
+```
+
+Kubernetes Architecture
+========================
+![image](https://user-images.githubusercontent.com/53966749/200156115-ff0537e5-6cdd-4967-b703-3df05b62af0e.png)
+![image](https://user-images.githubusercontent.com/53966749/200156143-ee653fc3-41f9-4226-ab30-3d7c502f5e35.png)
+![image](https://user-images.githubusercontent.com/53966749/200156163-83b9bf91-fed1-4226-9c0f-fd0b2ef36143.png)
+
+etcd
+=====
+![image](https://user-images.githubusercontent.com/53966749/200156202-0afd2b8c-77b8-45d6-b9fb-948a9d601fd0.png)
+![image](https://user-images.githubusercontent.com/53966749/200156219-25dd7689-60fa-4b18-a8c0-a9160944a577.png)
+![image](https://user-images.githubusercontent.com/53966749/200156262-dfa2f702-a634-4d9f-a102-5f952cd30be9.png)
+![image](https://user-images.githubusercontent.com/53966749/200156279-63337e0f-dfc0-4660-b13d-96acec090189.png)
 
 
 
