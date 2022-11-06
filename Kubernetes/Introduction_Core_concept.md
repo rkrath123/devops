@@ -167,7 +167,7 @@ FIELDS:
      Populated by the system. Read-only. More info:
      https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
      
-  ```
+ 
   
 ```
 Multicontainer pods
@@ -194,8 +194,10 @@ pod/nginxwebserver created
 sles15sp3:~ # kubectl get pods
 NAME             READY   STATUS    RESTARTS   AGE
 nginxwebserver   2/2     Running   0          9s
+
 ```
 ![image](https://user-images.githubusercontent.com/53966749/200158272-43e77618-2d59-4163-9833-447bdef12ed7.png)
+
 ```
 sles15sp3:~ # kubectl exec  -it nginxwebserver -- bash
 Defaulted container "democontainer" out of: democontainer, mybusybox
@@ -250,4 +252,5 @@ font-family: Tahoma, Verdana, Arial, sans-serif; }
 working. Further configuration is required.</p>
 
 / #
+  
 ```
