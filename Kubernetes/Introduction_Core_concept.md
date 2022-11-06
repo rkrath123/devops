@@ -109,6 +109,14 @@ kube-apiserver
 ![image](https://user-images.githubusercontent.com/53966749/200156472-8e5943e5-9a1c-41ad-8f89-e903a3b42111.png)
 ![image](https://user-images.githubusercontent.com/53966749/200156552-315a2d99-2840-424a-9474-a70ecf8f3a57.png)
 
+Kube-scheduler
+=============
+
+![image](https://user-images.githubusercontent.com/53966749/200158608-6f4a35d3-758d-4ef8-88ef-e2a2bbfbc358.png)
+![image](https://user-images.githubusercontent.com/53966749/200158640-a8fb0336-7147-4826-a571-92c38317827d.png)
+![image](https://user-images.githubusercontent.com/53966749/200158655-60bdb346-7a84-4587-804d-88100e1313f0.png)
+
+
 API
 ===
 
@@ -254,3 +262,78 @@ working. Further configuration is required.</p>
 / #
   
 ```
+
+Dockerfile entrypoint
+=====================
+![image](https://user-images.githubusercontent.com/53966749/200158676-613b3f6f-08d3-4451-bab4-0be032c55e8d.png)
+
+```
+sles15sp3:~/dockerfile # cat Dockerfile
+FROM busybox
+CMD ["sh"]
+
+sles15sp3:~/dockerfile # docker build -t demo1 .
+Sending build context to Docker daemon  2.048kB
+Step 1/2 : FROM busybox
+ ---> bc01a3326866
+Step 2/2 : CMD ["sh"]
+ ---> Running in b08ac4fd507a
+Removing intermediate container b08ac4fd507a
+ ---> 5e39904fe22c
+Successfully built 5e39904fe22c
+Successfully tagged demo1:latest
+
+sles15sp3:~/dockerfile # docker container run -it -d --name demo1 demo1
+96fb6c27c73c4611ebe1435278a5b63ba62bd5b061571464854abf025fafdec6
+sles15sp3:~/dockerfile # docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+96fb6c27c73c   demo1     "sh"      9 seconds ago   Up 8 seconds             demo1
+sles15sp3:~/dockerfile #
+
+sles15sp3:~/dockerfile # docker container run -it -d --name demo2 demo1 ping -c 10 google.com
+2a2b5a55c28521c9af43f868a435c09d3da5192bebd70e2f98299559b452c1e4
+sles15sp3:~/dockerfile #
+sles15sp3:~/dockerfile # docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS     NAMES
+2a2b5a55c285   demo1     "ping -c 10 google.c…"   5 seconds ago   Up 4 seconds             demo2
+96fb6c27c73c   demo1     "sh"                     2 minutes ago   Up 2 minutes             demo1
+sles15sp3:~/dockerfile # docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+96fb6c27c73c   demo1     "sh"      3 minutes ago   Up 3 minutes             demo1
+sles15sp3:~/dockerfile #
+
+example-2
+--------
+sles15sp3:~/dockerfile # cat Dockerfile
+FROM busybox
+#CMD ["sh"]
+ENTRYPOINT ["/bin/ping"]
+sles15sp3:~/dockerfile # docker build -t demo-image .
+Sending build context to Docker daemon  2.048kB
+Step 1/2 : FROM busybox
+ ---> bc01a3326866
+Step 2/2 : ENTRYPOINT ["/bin/ping"]
+ ---> Running in 1cde8decb955
+Removing intermediate container 1cde8decb955
+ ---> 6a41d2e2caed
+Successfully built 6a41d2e2caed
+Successfully tagged demo-image:latest
+
+sles15sp3:~/dockerfile # docker container run -it -d --name demo-con1 demo-image sh
+c1daffc635bae640ee31b5c3c7278ab47d1cd79cf29407dae12d77da60f6456f
+sles15sp3:~/dockerfile # docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+
+sles15sp3:~/dockerfile # docker container run -it -d --name demo-con2 demo-image -c 10 google.com
+9febfa23dacc3b32628823bdbfa832a67666000ba622ec8f0637fcc062096923
+sles15sp3:~/dockerfile # docker ps
+CONTAINER ID   IMAGE        COMMAND                  CREATED         STATUS         PORTS     NAMES
+9febfa23dacc   demo-image   "/bin/ping -c 10 goo…"   5 seconds ago   Up 4 seconds             demo-con2
+
+sles15sp3:~/dockerfile # docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS          PORTS     NAMES
+
+```
+
+
+
