@@ -318,9 +318,12 @@ NAME            SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 test-cron-job   */1 * * * *   False     0        <none>          11s
 test-cron-job   */1 * * * *   False     1        0s              48s
 
+
 to delete cron job
 --------------------
 kubectl delete cronjob [cronjob-name]
 kubectl delete -f [filename].yaml
 
 ```
+![image](https://user-images.githubusercontent.com/53966749/200277218-f7b6c82b-1322-47af-9ffe-882538e40da3.png)
+
