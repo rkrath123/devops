@@ -67,3 +67,192 @@ my-nginx-c54945c55-v6xlt   1/1     Running   0          16s   10.8.0.20   gke-cl
  power on/reboot node
  kubectl uncordon <node name>
 ```
+
+ Kubernetes Job
+ ==============
+ ```
+ A Kubernetes job is a workload controller object that performs one or more finite tasks in a cluster. The finite nature of jobs differentiates them from most controller objects, such as deployments, replica sets, stateful sets, and daemon sets.
+
+While these objects permanently maintain the desired state and number of pods in the cluster, jobs run until they complete the task and then terminate the associated pods.
+
+Kubernetes Job Use Cases
+-------------------------
+Kubernetes jobs can perform many important tasks in a cluster, including:
+
+Maintenance tasks (such as performing backups).
+Large calculations.
+Batch tasks (such as sending emails).
+Monitoring node behaviors.
+Managing work queues.
+Some Helm charts use jobs to install apps.
+
+ Create Kubernetes Job
+ ---------------------
+ sles15sp3:~/test # cat  jobs.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kplabs-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: kplabs-pods
+        image: busybox
+        command: ["/bin/sh"]
+        args: ["-c", "echo Hello World"]
+      restartPolicy: Never
+
+sles15sp3:~/test # kubectl apply -f jobs.yaml
+job.batch/kplabs-job created
+sles15sp3:~/test # kubectl get pod
+NAME               READY   STATUS      RESTARTS   AGE
+kplabs-job-lfx7p   0/1     Completed   0          7s
+sles15sp3:~/test # kubectl describe pod kplabs-job-lfx7p
+Name:         kplabs-job-lfx7p
+Namespace:    default
+Priority:     0
+Node:         gke-cluster-1-default-pool-37115ec3-tzq4/10.128.0.33
+Start Time:   Mon, 07 Nov 2022 07:36:39 +0000
+Labels:       controller-uid=87585a74-1d43-48c9-9b8a-799e5908ca8b
+              job-name=kplabs-job
+Annotations:  <none>
+Status:       Succeeded
+
+   State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+
+Execute Job More Than Once
+---------------------------
+To configure a job to perform the same task more than once, add the completions field in the spec section of the YAML manifest.
+sles15sp3:~/test # cat jobs.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kplabs-job
+spec:
+  completions: 10
+  template:
+    spec:
+      containers:
+      - name: kplabs-pods
+        image: busybox
+        command: ["/bin/sh"]
+        args: ["-c", "echo Hello World"]
+      restartPolicy: Never
+
+sles15sp3:~/test # kubectl apply -f jobs.yaml
+job.batch/kplabs-job created
+sles15sp3:~/test # kubectl get job --watch
+NAME         COMPLETIONS   DURATION   AGE
+kplabs-job   1/10          6s         6s
+kplabs-job   2/10          8s         8s
+kplabs-job   3/10          12s        12s
+kplabs-job   4/10          16s        16s
+kplabs-job   5/10          20s        20s
+kplabs-job   6/10          24s        24s
+kplabs-job   7/10          28s        28s
+kplabs-job   8/10          32s        32s
+kplabs-job   9/10          36s        36s
+kplabs-job   10/10         52s        52s
+
+sles15sp3:~/test # kubectl get job
+NAME         COMPLETIONS   DURATION   AGE
+kplabs-job   10/10         52s        111s
+
+
+Execute Parallel Job Instances
+------------------------------
+Kubernetes can execute more than one task instance at the same time. With sufficient resources, this action improves the speed of job completion.
+
+sles15sp3:~/test # cat jobs.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kplabs-job
+spec:
+  completions: 10
+  parallelism: 5
+  template:
+    spec:
+      containers:
+      - name: kplabs-pods
+        image: busybox
+        command: ["/bin/sh"]
+        args: ["-c", "echo Hello World"]
+      restartPolicy: Never
+
+
+sles15sp3:~/test # kubectl apply -f jobs.yaml
+job.batch/kplabs-job created
+sles15sp3:~/test #  kubectl get job --watch
+NAME         COMPLETIONS   DURATION   AGE
+kplabs-job   1/10          4s         4s
+kplabs-job   2/10          4s         4s
+kplabs-job   3/10          4s         4s
+kplabs-job   4/10          6s         6s
+kplabs-job   5/10          6s         6s
+kplabs-job   6/10          7s         7s
+kplabs-job   7/10          7s         7s
+kplabs-job   8/10          8s         8s
+kplabs-job   9/10          10s        10s
+kplabs-job   10/10         10s        10s
+sles15sp3:~/test # kubectl get job
+NAME         COMPLETIONS   DURATION   AGE
+kplabs-job   10/10         10s        22s
+
+Limit Time for Job Completion
+-----------------------------
+Include the spec.activeDeadlineSeconds field in the job's YAML manifest to limit the duration of the job. The number value corresponds to the number of seconds after which the job terminates, regardless of whether it was fully performed.
+
+sles15sp3:~/test # cat jobs.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kplabs-job
+spec:
+  completions: 10
+  activeDeadlineSeconds: 10
+  template:
+    spec:
+      containers:
+      - name: kplabs-pods
+        image: busybox
+        command: ["/bin/sh"]
+        args: ["-c", "echo Hello World"]
+      restartPolicy: Never
+sles15sp3:~/test #
+
+sles15sp3:~/test # kubectl apply -f jobs.yaml
+job.batch/kplabs-job created
+sles15sp3:~/test # kubectl get job --watch
+NAME         COMPLETIONS   DURATION   AGE
+kplabs-job   0/10          3s         3s
+kplabs-job   1/10          4s         4s
+kplabs-job   2/10          8s         8s
+kplabs-job   2/10          10s        10s
+
+The output shows only two pods completed.
+
+sles15sp3:~/test # kubectl get job
+NAME         COMPLETIONS   DURATION   AGE
+kplabs-job   2/10          45s        45s
+  
+ sles15sp3:~/test # kubectl describe job kplabs-job
+ 
+ Events:
+  Type     Reason            Age        From            Message
+  ----     ------            ----       ----            -------
+  Normal   SuccessfulCreate  <invalid>  job-controller  Created pod: kplabs-job-x8qlg
+  Normal   SuccessfulCreate  <invalid>  job-controller  Created pod: kplabs-job-wb474
+  Normal   SuccessfulCreate  <invalid>  job-controller  Created pod: kplabs-job-rfjm4
+  Normal   SuccessfulDelete  <invalid>  job-controller  Deleted pod: kplabs-job-rfjm4
+  Warning  DeadlineExceeded  <invalid>  job-controller  Job was active longer than specified deadline
+
+delete job
+----------
+kubectl delete job [job-name]
+kubectl delete -f [filename].yaml
+
+```
