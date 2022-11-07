@@ -256,3 +256,71 @@ kubectl delete job [job-name]
 kubectl delete -f [filename].yaml
 
 ```
+Cron Job
+=======
+```
+A Job is a Kubernetes object type whose purpose is to allow administrators to perform finite tasks inside a cluster. Unlike other Kubernetes objects, which ensure the desired number of pods are always running, Jobs terminate pods once the operation finishes.
+
+Regular Kubernetes Jobs can run multiple times if the number of completions declared in the YAML file is larger than one. However, each job instance runs either simultaneously with others or immediately after the previous one completes. To schedule job instances for a later time, use the CronJob controller.
+
+What is Kubernetes CronJob?
+----------------------------
+The CronJob is a Kubernetes controller that creates Jobs on a repeating schedule. It utilizes the Cron scheduling format used in Linux for script and command scheduling.
+
+CronJobs are used for regularly repeating cluster actions, such as report generation and backups. Furthermore, they allow administrators to schedule an individual task for a later time, such as a period of low activity in the cluster.
+
+How to Configure CronJob
+The cron syntax in the spec.schedule field is five characters long, and each character represents one division of time. The table below shows the numbers that can populate each field.
+
+*	*	*	*	*
+Minutes
+(0-59)	Hours
+(0-23)	Days in a month
+(1-31)	Months
+(1-12)	Weekdays
+(0-6)
+(Sunday to Saturday)
+An asterisk symbol in an expression signifies the unrestricted value. The example below schedules a job for 10 PM every Friday, regardless of the date:
+0 22 * * 5
+The next example schedules the job for August 28 at 9:15 AM.
+15 9 28 8 *
+You can also schedule tasks to be performed at a time interval. For example, to schedule a task every hour, type:
+* */1 * * *
+
+sles15sp3:~/test # cat cron_job.yaml
+----------------------------------
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: test-cron-job
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    metadata:
+      name: test-job
+    spec:
+      template:
+        spec:
+          containers:
+          - name: test
+            image: alpine:latest
+            command:
+            - "bin/sh"
+            - "-c"
+            - "for i in 1 2 3 4 5 6 7 8 9 ; do echo $i ; done"
+          restartPolicy: Never
+
+sles15sp3:~/test # kubectl apply -f cron_job.yaml
+Warning: batch/v1beta1 CronJob is deprecated in v1.21+, unavailable in v1.25+; use batch/v1 CronJob
+cronjob.batch/test-cron-job created
+sles15sp3:~/test # kubectl get cronjob --watch
+NAME            SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+test-cron-job   */1 * * * *   False     0        <none>          11s
+test-cron-job   */1 * * * *   False     1        0s              48s
+
+to delete cron job
+--------------------
+kubectl delete cronjob [cronjob-name]
+kubectl delete -f [filename].yaml
+
+```
