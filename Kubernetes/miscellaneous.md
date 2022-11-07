@@ -71,9 +71,11 @@ my-nginx-c54945c55-v6xlt   1/1     Running   0          16s   10.8.0.20   gke-cl
  Kubernetes Job
  ==============
  ```
- A Kubernetes job is a workload controller object that performs one or more finite tasks in a cluster. The finite nature of jobs differentiates them from most controller objects, such as deployments, replica sets, stateful sets, and daemon sets.
+ A Kubernetes job is a workload controller object that performs one or more finite tasks in a cluster. 
+ The finite nature of jobs differentiates them from most controller objects, such as deployments, replica sets, stateful sets, and daemon sets.
 
-While these objects permanently maintain the desired state and number of pods in the cluster, jobs run until they complete the task and then terminate the associated pods.
+While these objects permanently maintain the desired state and number of pods in the cluster,
+jobs run until they complete the task and then terminate the associated pods.
 
 Kubernetes Job Use Cases
 -------------------------
@@ -125,7 +127,9 @@ Status:       Succeeded
 
 Execute Job More Than Once
 ---------------------------
-To configure a job to perform the same task more than once, add the completions field in the spec section of the YAML manifest.
+To configure a job to perform the same task more than once,
+add the completions field in the spec section of the YAML manifest.
+
 sles15sp3:~/test # cat jobs.yaml
 apiVersion: batch/v1
 kind: Job
@@ -164,7 +168,8 @@ kplabs-job   10/10         52s        111s
 
 Execute Parallel Job Instances
 ------------------------------
-Kubernetes can execute more than one task instance at the same time. With sufficient resources, this action improves the speed of job completion.
+Kubernetes can execute more than one task instance at the same time.
+With sufficient resources, this action improves the speed of job completion.
 
 sles15sp3:~/test # cat jobs.yaml
 apiVersion: batch/v1
@@ -204,7 +209,9 @@ kplabs-job   10/10         10s        22s
 
 Limit Time for Job Completion
 -----------------------------
-Include the spec.activeDeadlineSeconds field in the job's YAML manifest to limit the duration of the job. The number value corresponds to the number of seconds after which the job terminates, regardless of whether it was fully performed.
+Include the spec.activeDeadlineSeconds field in the job's YAML manifest to limit the duration of the job. 
+The number value corresponds to the number of seconds after which the job terminates, 
+regardless of whether it was fully performed.
 
 sles15sp3:~/test # cat jobs.yaml
 apiVersion: batch/v1
@@ -259,18 +266,27 @@ kubectl delete -f [filename].yaml
 Cron Job
 =======
 ```
-A Job is a Kubernetes object type whose purpose is to allow administrators to perform finite tasks inside a cluster. Unlike other Kubernetes objects, which ensure the desired number of pods are always running, Jobs terminate pods once the operation finishes.
+A Job is a Kubernetes object type whose purpose is to allow administrators to perform finite tasks inside a cluster.
+Unlike other Kubernetes objects, which ensure the desired number of pods are always running,
+Jobs terminate pods once the operation finishes.
 
-Regular Kubernetes Jobs can run multiple times if the number of completions declared in the YAML file is larger than one. However, each job instance runs either simultaneously with others or immediately after the previous one completes. To schedule job instances for a later time, use the CronJob controller.
+Regular Kubernetes Jobs can run multiple times if the number of completions declared in the YAML file is larger than one.
+However, each job instance runs either simultaneously with others or immediately after the previous one completes.
+To schedule job instances for a later time, use the CronJob controller.
 
 What is Kubernetes CronJob?
 ----------------------------
-The CronJob is a Kubernetes controller that creates Jobs on a repeating schedule. It utilizes the Cron scheduling format used in Linux for script and command scheduling.
+The CronJob is a Kubernetes controller that creates Jobs on a repeating schedule.
+It utilizes the Cron scheduling format used in Linux for script and command scheduling.
 
-CronJobs are used for regularly repeating cluster actions, such as report generation and backups. Furthermore, they allow administrators to schedule an individual task for a later time, such as a period of low activity in the cluster.
+CronJobs are used for regularly repeating cluster actions, such as report generation and backups. 
+Furthermore, they allow administrators to schedule an individual task for a later time, 
+such as a period of low activity in the cluster.
 
 How to Configure CronJob
-The cron syntax in the spec.schedule field is five characters long, and each character represents one division of time. The table below shows the numbers that can populate each field.
+The cron syntax in the spec.schedule field is five characters long, 
+and each character represents one division of time.
+The table below shows the numbers that can populate each field.
 
 *	*	*	*	*
 Minutes
@@ -280,11 +296,13 @@ Minutes
 (1-12)	Weekdays
 (0-6)
 (Sunday to Saturday)
-An asterisk symbol in an expression signifies the unrestricted value. The example below schedules a job for 10 PM every Friday, regardless of the date:
+An asterisk symbol in an expression signifies the unrestricted value.
+The example below schedules a job for 10 PM every Friday, regardless of the date:
 0 22 * * 5
 The next example schedules the job for August 28 at 9:15 AM.
 15 9 28 8 *
-You can also schedule tasks to be performed at a time interval. For example, to schedule a task every hour, type:
+You can also schedule tasks to be performed at a time interval. 
+For example, to schedule a task every hour, type:
 * */1 * * *
 
 sles15sp3:~/test # cat cron_job.yaml
@@ -333,9 +351,11 @@ Kubernetes — Liveness and Readiness Probes
 Liveness
 --------
 Liveness Probe
-Suppose that a Pod is running our application inside a container, but due to some reason let’s say memory leak, cpu usage, application deadlock etc the application is not responding to our requests, and stuck in error state.
+Suppose that a Pod is running our application inside a container,but due to some reason let’s say memory leak, cpu usage, 
+application deadlock etc the application is not responding to our requests, and stuck in error state.
 
-Liveness probe checks the container health as we tell it do, and if for some reason the liveness probe fails, it restarts the container. We can define liveness probe in 3 ways:
+Liveness probe checks the container health as we tell it do, and if for some reason the liveness probe fails, 
+it restarts the container. We can define liveness probe in 3 ways:
 
 We are creating a container with name liveness, and as the container initialise we use the following command:
 
@@ -367,7 +387,8 @@ spec:
       periodSeconds: 5
       
   --------------
- cat   commands tell the liveness probe to open file at path /tmp/healthy, and if it can’t the liveness probe will fail and container will restart.
+ cat   commands tell the liveness probe to open file at path /tmp/healthy, 
+ and if it can’t the liveness probe will fail and container will restart.
 
 initialDelaySeconds: 3
 This is the delay which tells kubelet to wait for 3 seconds before performing the first probe
@@ -375,7 +396,8 @@ This is the delay which tells kubelet to wait for 3 seconds before performing th
 periodSeconds: 5
 This field specifies that kubelet should perform a probe every 5 seconds.
 
-So, according to above example our container will start and work fine for first 30 seconds, and after that liveness probe will fail and restart the container.
+So, according to above example our container will start and work fine for first 30 seconds,
+and after that liveness probe will fail and restart the container.
 
 sles15sp3:~/test # kubectl apply -f pod.yaml
 pod/liveness-exec created
@@ -430,7 +452,9 @@ spec:
 ```
 Readiness Probe
 ---------------
-In some cases we would like our application to be alive, but not serve traffic unless some conditions are met e.g, populating a dataset, waiting for some other service to be alive etc. In such cases we use readiness probe. If the condition inside readiness probe passes, only then our application can serve traffic.
+In some cases we would like our application to be alive, but not serve traffic unless some conditions are met e.g, 
+populating a dataset, waiting for some other service to be alive etc. 
+In such cases we use readiness probe. If the condition inside readiness probe passes, only then our application can serve traffic.
 
 Readiness probe is defined in 3 ways exactly like the Liveness probe above. We just need to replace livenessProbe with readinessProbe like this:
 ```
