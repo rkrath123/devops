@@ -342,6 +342,8 @@ We are creating a container with name liveness, and as the container initialise 
 - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
 to create a file healthy at path /tmp/healthy, and delete it after 30 seconds.
 
+```
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -406,4 +408,72 @@ spec:
       initialDelaySeconds: 60
       periodSeconds: 5
       
+liveness nginx
+--------------
+  apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness
+spec:
+  containers:
+  - name: liveness
+    image: ubuntu
+    tty: true
+    livenessProbe:
+      exec:
+        command:
+        - service
+        - nginx
+        - status
+      initialDelaySeconds: 20
+      periodSeconds: 5
+```
+Readiness Probe
+---------------
+In some cases we would like our application to be alive, but not serve traffic unless some conditions are met e.g, populating a dataset, waiting for some other service to be alive etc. In such cases we use readiness probe. If the condition inside readiness probe passes, only then our application can serve traffic.
+
+Readiness probe is defined in 3 ways exactly like the Liveness probe above. We just need to replace livenessProbe with readinessProbe like this:
+```
+readinessProbe:
+  exec:
+    command:
+    - cat
+    - /tmp/healthy
+  initialDelaySeconds: 5
+  periodSeconds: 5
   
+Summary
+Both liveness & readiness probes are used to control the health of an application. Failing liveness probe will restart the container, whereas failing readiness probe will stop our application from serving traffic.
+
+sles15sp3:~/test # cat readiness.yaml
+---------------------------------------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness
+spec:
+  containers:
+  - name: readiness
+    image: ubuntu
+    tty: true
+    readinessProbe:
+     exec:
+       command:
+       - cat
+       - /tmp/healthy
+     initialDelaySeconds: 5
+     periodSeconds: 5
+
+sles15sp3:~/test # kubectl exec -it readiness -- touch /tmp/healthy
+
+sles15sp3:~/test # kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+readiness   0/1     Running   0          34s
+sles15sp3:~/test # kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+readiness   1/1     Running   0          37s
+
+
+
+```
+
