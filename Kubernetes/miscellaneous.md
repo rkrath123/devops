@@ -327,3 +327,83 @@ kubectl delete -f [filename].yaml
 ```
 ![image](https://user-images.githubusercontent.com/53966749/200277218-f7b6c82b-1322-47af-9ffe-882538e40da3.png)
 
+Kubernetes — Liveness and Readiness Probes
+==========================================
+
+Liveness
+--------
+Liveness Probe
+Suppose that a Pod is running our application inside a container, but due to some reason let’s say memory leak, cpu usage, application deadlock etc the application is not responding to our requests, and stuck in error state.
+
+Liveness probe checks the container health as we tell it do, and if for some reason the liveness probe fails, it restarts the container. We can define liveness probe in 3 ways:
+
+We are creating a container with name liveness, and as the container initialise we use the following command:
+
+- touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+to create a file healthy at path /tmp/healthy, and delete it after 30 seconds.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: k8s.gcr.io/busybox
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 3
+      periodSeconds: 5
+      
+  --------------
+ cat   commands tell the liveness probe to open file at path /tmp/healthy, and if it can’t the liveness probe will fail and container will restart.
+
+initialDelaySeconds: 3
+This is the delay which tells kubelet to wait for 3 seconds before performing the first probe
+
+periodSeconds: 5
+This field specifies that kubelet should perform a probe every 5 seconds.
+
+So, according to above example our container will start and work fine for first 30 seconds, and after that liveness probe will fail and restart the container.
+
+sles15sp3:~/test # kubectl apply -f pod.yaml
+pod/liveness-exec created
+sles15sp3:~/test #
+sles15sp3:~/test # kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+liveness-exec   1/1     Running   0          10s
+sles15sp3:~/test # kubectl get pods --watch
+NAME            READY   STATUS    RESTARTS   AGE
+liveness-exec   1/1     Running   0          15s
+liveness-exec   1/1     Running   1 (1s ago)   77s
+liveness-exec   1/1     Running   2 (1s ago)   2m32s
+
+liveness-http
+-------------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: nginx
+    ports:
+    - containerPort: 80
+    livenessProbe:
+      httpGet:
+         path: /kplabs.html
+         port: 80
+      initialDelaySeconds: 60
+      periodSeconds: 5
+      
+  
