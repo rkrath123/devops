@@ -1,0 +1,16 @@
+Security
+=========
+In the video, we had seen how the sample kubeconfig file was making use of certificates for authentication. 
+Depending on the service provider, the provider can use any of the authentication modes, it can be certificates, tokens, etc.
+
+In the older Digital Ocean based K8s cluster, the kubeconfig file used certificates. However, the newer one makes use of bearer tokens.
+
+Replace the IP and Token in the below command based on your environment
+
+curl -k https://IP-HERE:/api/v1/ --header "Authorization: Bearer $TOKEN" 
+
+
+![image](https://user-images.githubusercontent.com/53966749/200806929-8ca11fa3-6935-4a7e-b505-1f193909642a.png)
+![image](https://user-images.githubusercontent.com/53966749/200807083-e7439f5c-dd57-42b2-bf6b-48226ab0ed34.png)
+
+![image](https://user-images.githubusercontent.com/53966749/200813255-2ad4c798-f0ed-4f43-a870-26be5885e39d.png)
