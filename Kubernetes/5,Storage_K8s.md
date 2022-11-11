@@ -100,3 +100,8 @@ sles15sp3:~ #
 
 ![image](https://user-images.githubusercontent.com/53966749/201325741-29e40675-81df-479c-992d-c4c16cde0837.png)
 
+
+Volumes in K8s
+==============
+![image](https://user-images.githubusercontent.com/53966749/201326152-cf99573b-bd54-4a57-aa89-fc1bada35d04.png)
+
