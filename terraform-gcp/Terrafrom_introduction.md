@@ -17,3 +17,15 @@ terraform plan
 terraform apply
 
 ![image](https://user-images.githubusercontent.com/53966749/201641770-a158bb8e-c3d3-4395-87d9-8dd4d00ad8a2.png)
+
+```
+main.tf
+resource local_file sample_res {
+  filename = "sample.txt"
+  content="I love terraform"
+
+}
+terraform init
+terraform paln
+terraform apply
+```
