@@ -162,3 +162,27 @@ Variables
 ![image](https://user-images.githubusercontent.com/53966749/201652367-19faaba4-80c7-4ae5-a773-adaa81b1f544.png)
 
 
+```
+cat main.tf
+-------------
+
+resource local_file sample_res {
+  filename = var.filename1
+  content = var.content1
+}
+
+
+
+cat variables.tf
+-----------------
+variable filename1 {
+  type      = string
+  default   ="sample.txt"
+}
+
+variable content1 {
+  type        = string
+  default     = "I am loving Terraform"
+}
+
+
