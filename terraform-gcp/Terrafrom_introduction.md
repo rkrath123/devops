@@ -320,3 +320,159 @@ explicit.txt
 This is random String from RP : frctr]h=H2
 
 ```
+
+output.tf
+=========
+![image](https://user-images.githubusercontent.com/53966749/201674646-1fe23c27-06c9-421a-a56b-ebd2d4f1c043.png)
+
+Lifecycle Rules
+==================
+
+![image](https://user-images.githubusercontent.com/53966749/201675046-067aeb68-dd91-4b86-ba24-23efc78f31a6.png)
+
+ main.tf
+--------
+
+```
+resource random_integer name {
+  min = 20
+  max = 350
+
+}
+terraform apply
+---------------
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+random_integer.name: Creating...
+random_integer.name: Creation complete after 0s [id=82]
+random_string.name2: Destroying... [id=eX0_?DM4VH]
+random_string.name2: Destruction complete after 0s
+
+```
+
+create_before_destroy with main.tf
+---------------------------------
+```
+main.tf
+-------
+resource random_integer name {
+  min = 50
+  max = 350
+      lifecycle{
+        create_before_destroy = true
+  
+    }
+
+}
+
+terraform apply
+------------------
+Terraform will perform the following actions: 
+
+  # random_integer.name must be replaced      
++/- resource "random_integer" "name" {        
+      ~ id     = "82" -> (known after apply)  
+      ~ min    = 20 -> 50 # forces replacement
+      ~ result = 82 -> (known after apply)    
+        # (1 unchanged attribute hidden)      
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.    
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+random_integer.name: Creating...
+random_integer.name: Creation complete after 0s [id=179]
+random_integer.name (deposed object b2edcb91): Destroying... [id=82]
+random_integer.name: Destruction complete after 0s
+
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+
+```
+prevent_destroy in main.tf
+---------------------------
+```
+resource random_integer name {
+  min = 50
+  max = 350
+      lifecycle{
+        #create_before_destroy = true
+        prevent_destroy = true
+  
+    }
+
+
+}
+
+PS C:\Users\rathram\OneDrive - Hewlett Packard Enterprise\terraform\first-tf-script> terraform  destroy
+random_integer.name: Refreshing state... [id=179]
+╷
+│ Error: Instance cannot be destroyed
+│
+│   on main.tf line 1:
+│    1: resource random_integer name {
+│
+│ Resource random_integer.name has lifecycle.prevent_destroy set, but the plan calls for this resource to be destroyed. To avoid this error and continue with the
+│ plan, either disable lifecycle.prevent_destroy or reduce the scope of the plan using the -target flag.
+╵
+PS C:\Users\rathram\OneDrive - Hewlett Packard Enterprise\terraform\first-tf-script> 
+
+```
+
+ignore_changes in main.tf
+-------------------------
+```
+main.tf
+------
+resource random_integer name {
+  min = 67
+  max = 97
+      lifecycle{
+        #create_before_destroy = true
+        #prevent_destroy = true
+        ignore_changes = [min]
+  
+    }
+
+
+}
+
+> terraform  apply
+random_integer.name: Refreshing state... [id=71]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # random_integer.name must be replaced
+-/+ resource "random_integer" "name" {
+      ~ id     = "71" -> (known after apply)
+      ~ max    = 84 -> 97 # forces replacement
+      ~ min    = 60 -> 67
+      ~ result = 71 -> (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+random_integer.name: Destroying... [id=71]
+random_integer.name: Destruction complete after 0s
+random_integer.name: Creating...
+random_integer.name: Creation complete after 0s [id=76]
+
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+
+```
