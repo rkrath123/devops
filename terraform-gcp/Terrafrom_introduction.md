@@ -156,3 +156,9 @@ name2 = "D8ydnc]&{Mp%cj0"
 PS C:\Users\rathram\OneDrive - Hewlett Packard Enterprise\terraform\first-tf-script> 
 
 ```
+
+Variables
+==========
+![image](https://user-images.githubusercontent.com/53966749/201652367-19faaba4-80c7-4ae5-a773-adaa81b1f544.png)
+
+
