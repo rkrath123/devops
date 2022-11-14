@@ -200,7 +200,10 @@ cat main.tf
 
 resource local_file sample_res {
   filename = var.filename1
+ /* content = var.content1[0]
+ */
   content = var.content1["name"]
+  
 }
 
 variables.tf
@@ -243,4 +246,76 @@ variable content1 {
 
 
 ```
+Use variables
+=============
+![image](https://user-images.githubusercontent.com/53966749/201669970-6af72961-d444-4055-a92c-555baf1c6f9a.png)
 
+![image](https://user-images.githubusercontent.com/53966749/201670549-e423c311-5922-4c61-9615-131e093f82b8.png)
+![image](https://user-images.githubusercontent.com/53966749/201670687-635310ad-7191-4bd5-8465-9d9a661d4c36.png)
+
+
+Multiple Providers
+===================
+![image](https://user-images.githubusercontent.com/53966749/201671391-4b76cd9f-fdcc-4da4-8578-ebc8ae267298.png)
+
+multiple providers in same main.tf
+
+cat main.tf
+-----------
+```
+resource local_file name {
+  content = "This is HCL"
+  filename = "sample.txt"
+}
+
+resource random_string name {
+  length  = 10
+}
+
+```
+Implicit dependancy
+====================
+
+![image](https://user-images.githubusercontent.com/53966749/201671710-e93c5cbd-9eb4-4fed-8303-833ac01cbfb7.png)
+
+```
+main.tf
+-------
+resource local_file name1 {
+  filename = "implicit.txt"
+  content = "This is random String from RP : ${random_string.name2.id}"
+
+}
+
+resource random_string name2 {
+  length  = 10
+}
+
+implicit.txt
+------------
+This is random String from RP : eX0_?DM4VH
+```
+
+Explicit dependancy
+===================
+![image](https://user-images.githubusercontent.com/53966749/201673830-feb24784-26d8-44c3-846a-001dd4b5830c.png)
+
+```
+main.tf
+---------
+resource local_file name1 {
+  filename = "explicit.txt"
+  content = "This is random String from RP : ${random_string.name2.id}"
+  depends_on =  [random_string.name2]
+}
+
+resource random_string name2 {
+  length  = 10
+}
+
+
+explicit.txt
+-----------
+This is random String from RP : frctr]h=H2
+
+```
