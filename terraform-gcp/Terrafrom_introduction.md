@@ -476,3 +476,72 @@ random_integer.name: Creation complete after 0s [id=76]
 Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
 
 ```
+
+Provider Version
+=================
+![image](https://user-images.githubusercontent.com/53966749/201685010-2903b446-1917-4dd4-b045-ab37801545b5.png)
+
+![image](https://user-images.githubusercontent.com/53966749/201685486-fe6769c8-6679-4c25-8c18-62d4c8578796.png)
+
+
+```
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+      version = "2.3.1"
+    }
+  }
+}
+
+provider "random" {
+  # Configuration options
+}
+
+
+resource random_integer name {
+  min = 0
+  max = 100
+}
+
+```
+
+Data source -Read file
+========================
+
+![image](https://user-images.githubusercontent.com/53966749/201686121-b2375a6b-980a-4126-b866-48de87524ebf.png)
+
+```
+main.tf
+--------
+data local_file foo {
+  filename = "sample1.txt"
+}
+
+output name1 {
+  value       = data.local_file.foo.content
+}
+
+
+sample1.txt
+----------
+hello i am ramakant rath
+
+terraform apply
+--------------
+Do you want to perform these actions?
+  Terraform will perform the actions described above.    
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+random_integer.name: Destroying... [id=76]
+random_integer.name: Destruction complete after 0s
+
+Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+
+Outputs:
+
+name1 = "hello i am ramakant rath"
+
+```
