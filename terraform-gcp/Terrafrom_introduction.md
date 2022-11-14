@@ -128,6 +128,10 @@ Terraform will perform the following actions:
       + upper       = true
     }
 
+Types of Variables
+===================
+![image](https://user-images.githubusercontent.com/53966749/201667879-01ebf182-4d8c-455f-90bf-2087938aedce.png)
+
 Plan: 2 to add, 0 to change, 1 to destroy.
 
 Changes to Outputs:
@@ -185,4 +189,58 @@ variable content1 {
   default     = "I am loving Terraform"
 }
 
+```
+Types of Variables
+===================
+![image](https://user-images.githubusercontent.com/53966749/201669153-6135fa86-f2e5-40a6-a3ee-c0c8ecffb34f.png)
+
+```
+cat main.tf
+-----------
+
+resource local_file sample_res {
+  filename = var.filename1
+  content = var.content1["name"]
+}
+
+variables.tf
+------------
+variable filename1 {
+  type        = string
+  default     = "sample1.txt"
+}
+/*
+variable content1 {
+  type        = number
+  default     = 23
+}
+*/
+
+/*
+variable content1 {
+  type        = bool
+  default     = true
+}
+*/
+/*
+variable content1 {
+  type        = list(string)
+  default     = ["red", "green", "blue"]
+}
+*/
+
+/*
+variable content1 {
+  type        = tuple([string,bool,number])
+  default     = ["red", true, 23]
+}
+*/
+
+variable content1 {
+  type        = map
+  default     = {name = "Ankit", age = 32}
+}
+
+
+```
 
