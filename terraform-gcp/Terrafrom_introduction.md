@@ -259,6 +259,7 @@ Multiple Providers
 ![image](https://user-images.githubusercontent.com/53966749/201671391-4b76cd9f-fdcc-4da4-8578-ebc8ae267298.png)
 
 multiple providers in same main.tf
+----------------------------------
 
 cat main.tf
 -----------
