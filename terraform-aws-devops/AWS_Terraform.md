@@ -162,3 +162,22 @@ format is not not in order
 ![image](https://user-images.githubusercontent.com/53966749/203887967-e2972155-161d-4d79-a5c6-8e830e993278.png)
 
 
+Multiple Provider
+===================
+![image](https://user-images.githubusercontent.com/53966749/203889836-296e7425-63cb-44ef-9b24-1d9985c35315.png)
+![image](https://user-images.githubusercontent.com/53966749/203889906-1ded28da-ad6d-41ed-94f1-cffb11afb2e4.png)
+
+Terraform Advance local provisioner
+===================================
+
+![image](https://user-images.githubusercontent.com/53966749/203890156-abaa6465-08a0-416c-bba3-57c906e07000.png)
+
+![image](https://user-images.githubusercontent.com/53966749/203890246-56da9338-5015-49c4-8f8b-bf3334fc2415.png)
+
+
+Remote Provisioner
+===================
+![image](https://user-images.githubusercontent.com/53966749/203890649-9df1d629-af76-415f-b7a7-889dea495524.png)
+
+![image](https://user-images.githubusercontent.com/53966749/203890612-2b47a930-8785-4a2f-ad5b-348ecc3da4f3.png)
+
