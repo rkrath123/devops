@@ -181,3 +181,56 @@ Remote Provisioner
 
 ![image](https://user-images.githubusercontent.com/53966749/203890612-2b47a930-8785-4a2f-ad5b-348ecc3da4f3.png)
 
+![image](https://user-images.githubusercontent.com/53966749/203891219-17fad02f-8241-4b4c-b07a-9669929c0cf6.png)
+
+![image](https://user-images.githubusercontent.com/53966749/203891267-88947413-c44e-4f2e-9145-08369232ec8b.png)
+
+
+Terraform plan -destroy
+=======================
+it will show what going to destroy
+![image](https://user-images.githubusercontent.com/53966749/203891642-00ba2d4d-c015-4ae1-bf3a-e78bf45dfbac.png)
+
+Terraform workspace
+====================
+![image](https://user-images.githubusercontent.com/53966749/203891935-2c5b0ca3-7337-4e90-abb9-2ed535d047bd.png)
+![image](https://user-images.githubusercontent.com/53966749/203891964-10c0773a-904f-4c78-b3c5-5dcb49e571be.png)
+![image](https://user-images.githubusercontent.com/53966749/203891869-8c77c028-2e8d-49fb-86e6-cd7babb6f184.png)
+
+Terrafrom taint
+===============
+it will delete and create again
+
+![image](https://user-images.githubusercontent.com/53966749/203892462-2d6a2649-5e21-472e-8834-5513ae355109.png)
+![image](https://user-images.githubusercontent.com/53966749/203892526-373652c6-e492-4c83-ad91-c5f8210d54fe.png)
+![image](https://user-images.githubusercontent.com/53966749/203892567-4d430e1f-c328-4a55-b51b-e92632a7aaac.png)
+
+
+Terraform Functions
+===================
+![image](https://user-images.githubusercontent.com/53966749/203892679-b7f02527-9d6d-415d-b9eb-b68ffff1f807.png)
+![image](https://user-images.githubusercontent.com/53966749/203892703-78781ca5-a1b9-4d42-9ad9-574a7308523b.png)
+
+Debugging in terraform
+======================
+
+![image](https://user-images.githubusercontent.com/53966749/203892791-f54441c7-64a1-4723-bf83-98a7f43ef9db.png)
+![image](https://user-images.githubusercontent.com/53966749/203892832-5a7b3363-d7e3-4e4e-8878-d5cd3c976534.png)
+
+now it will not show everything log
+
+![image](https://user-images.githubusercontent.com/53966749/203892936-7e246a17-e7dd-4caa-8c49-de0ea405b44c.png)
+
+we can use export log path
+
+![image](https://user-images.githubusercontent.com/53966749/203892988-e1b7768a-c930-4ff8-86a2-de029205fcfb.png)
+
+
+Terraform Sensitive Parameter
+==============================
+
+terraform plan
+
+![image](https://user-images.githubusercontent.com/53966749/203893159-5bf862da-b845-4bfe-bda7-cb71a0233117.png)
+
+
