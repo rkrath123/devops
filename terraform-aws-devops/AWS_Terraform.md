@@ -79,3 +79,86 @@ terraform using object variable
 ===============================
 ![image](https://user-images.githubusercontent.com/53966749/203685370-151eb70e-c774-40e1-b227-f146bfd46e9c.png)
 
+Create EC2 using terraform
+============================
+![image](https://user-images.githubusercontent.com/53966749/203882506-41550029-952c-4b3a-acf6-bb59a582406c.png)
+![image](https://user-images.githubusercontent.com/53966749/203882547-236244d1-85d6-4e33-8a53-62bd2cfaf576.png)
+
+
+EC2 Elastic ip
+===============
+![image](https://user-images.githubusercontent.com/53966749/203882699-ed7094fb-8dbd-44ba-8d3b-262e844c4fa9.png)
+
+
+EC2 Sequrity Group
+=================
+![image](https://user-images.githubusercontent.com/53966749/203883032-44b06a39-b67d-4ce6-8687-bc496804366d.png)
+![image](https://user-images.githubusercontent.com/53966749/203882898-57b6a127-229f-4f19-86cb-044ca2e1ef20.png)
+![image](https://user-images.githubusercontent.com/53966749/203882963-4eca052f-cbab-464e-bed1-069335878c95.png)
+
+Terraform Modules
+=================
+![image](https://user-images.githubusercontent.com/53966749/203883369-aa9666fb-29ed-4fdc-a208-ca27d0bbf5f2.png)
+![image](https://user-images.githubusercontent.com/53966749/203883435-e82c801d-3ff5-40ba-897b-776ca8184406.png)
+
+Terraform o/p modules
+=====================
+![image](https://user-images.githubusercontent.com/53966749/203883670-af44caa7-174e-4326-b9cf-9734402d8d88.png)
+![image](https://user-images.githubusercontent.com/53966749/203883702-eff7ac2b-ff18-407a-a003-46605f1de3d5.png)
+
+Create IAM user and attach
+==========================
+![image](https://user-images.githubusercontent.com/53966749/203884130-0ff03238-4bf8-4ec4-ade7-1a1582ce334e.png)
+![image](https://user-images.githubusercontent.com/53966749/203884236-f98c2c12-893b-4bd7-ab15-c45e30709e18.png)
+![image](https://user-images.githubusercontent.com/53966749/203884268-1826b4f0-d6d1-4654-8cd9-036787a7bb97.png)
+
+Terraform RDS Create
+====================
+![image](https://user-images.githubusercontent.com/53966749/203884871-a0deccbb-b23f-4372-98e6-ff5a72d8d074.png)
+![image](https://user-images.githubusercontent.com/53966749/203884904-de7ecd09-01c5-46e8-a541-34ea309b8c63.png)
+
+Terraform statefile in S3 
+=========================
+![image](https://user-images.githubusercontent.com/53966749/203885815-080fb242-7a4b-4ee2-affa-eac006c3f672.png)
+![image](https://user-images.githubusercontent.com/53966749/203885873-2aca3355-6165-4597-85fa-36e97dcf51b5.png)
+![image](https://user-images.githubusercontent.com/53966749/203885933-c9ddedd8-4f31-45e4-92e5-c662779debb8.png)
+
+terraform Count
+================
+Create 3 EC2 resource
+
+![image](https://user-images.githubusercontent.com/53966749/203886070-a4e1a8ef-4ecb-4b8d-b2ce-a39bf21d4690.png)
+
+Terraform import one vpc to another
+==================================
+![image](https://user-images.githubusercontent.com/53966749/203886742-f4b7e2ee-0dcc-4aa7-9bc8-74ec0fae7557.png)
+
+
+terraform advance depends
+==========================
+it will vreate first EC2 then 2nd EC2 will be created
+
+![image](https://user-images.githubusercontent.com/53966749/203887102-43124331-8544-4a93-b0ee-25c91e89c28e.png)
+
+
+EC2 tag filter
+==============
+![image](https://user-images.githubusercontent.com/53966749/203887512-b37f9939-c577-4f87-8a36-058a1302cbdf.png)
+![image](https://user-images.githubusercontent.com/53966749/203887569-b6edc20f-a66c-4cd0-8969-d7ac9577ec22.png)
+![image](https://user-images.githubusercontent.com/53966749/203887628-2960552d-d46f-4b3a-9d04-7b9898d3bd29.png)
+
+terraform syntax
+==================
+![image](https://user-images.githubusercontent.com/53966749/203887724-c05332ce-ef1e-40f1-bc7f-0a730797f21c.png)
+
+
+Terraform Format
+===============
+
+format is not not in order
+
+![image](https://user-images.githubusercontent.com/53966749/203887906-d8da6865-23e9-4c10-a808-a90701a5c793.png)
+
+![image](https://user-images.githubusercontent.com/53966749/203887967-e2972155-161d-4d79-a5c6-8e830e993278.png)
+
+
