@@ -73,6 +73,15 @@ https://github.com/bregman-arie/devops-exercises/tree/master/topics/terraform
 https://github.com/Tikam02/DevOps-Guide/tree/master/Infrastructure-provisioning/Terraform
 
 
+CI/CD Cheatsheet
+-----------------
+https://github.com/Tikam02/DevOps-Guide/tree/master/CI-CD/git
+
+https://github.com/bregman-arie/devops-exercises/tree/master/topics/git
+
+https://github.com/Tikam02/DevOps-Guide/tree/master/CI-CD/jenkins
+
+
 Overall Repo and Cheatsheet
 ===========================
 https://github.com/Tikam02/DevOps-Guide
