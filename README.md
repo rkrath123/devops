@@ -57,6 +57,8 @@ https://github.com/bregman-arie/python-exercises
 
 https://www.pythoncheatsheet.org/
 
+https://github.com/dennyzhang/cheatsheet-python-A4
+
 
 Shell Scripting Cheatsheet
 ---------------------------
@@ -99,3 +101,5 @@ https://github.com/JeffDeCola/my-cheat-sheets
 https://github.com/ruanbekker/cheatsheets
 
 https://github.com/cherkavi/cheat-sheet
+
+https://github.com/dennyzhang/cheatsheet.dennyzhang.com
