@@ -70,18 +70,18 @@ Terraform Cheatsheet
 -------------------
 https://github.com/bregman-arie/devops-exercises/tree/master/topics/terraform
 
-https://github.com/rkrath123/DevOps-Guide/tree/master/Infrastructure-provisioning/Terraform
+https://github.com/Tikam02/DevOps-Guide/tree/master/Infrastructure-provisioning/Terraform
 
 
 Overall Repo and Cheatsheet
 ===========================
-https://github.com/rkrath123/DevOps-Guide
+https://github.com/Tikam02/DevOps-Guide
 
 https://github.com/bregman-arie/devops-exercises
 
 https://github.com/bregman-arie/devops-resources
 
-https://github.com/rkrath123/the-book-of-secret-knowledge
+https://github.com/trimstray/the-book-of-secret-knowledge
 
 https://github.com/sk3pp3r/cheat-sheet-pdf
 
