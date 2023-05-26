@@ -1,6 +1,6 @@
 GIT Commands
 ------------
-
+```
 rathram@VQFQADTKPM MINGW64 ~/Desktop/Devops
 $ git init
 Initialized empty Git repository in C:/Users/rathram/Desktop/Devops/.git/
@@ -95,3 +95,4 @@ rathram@VQFQADTKPM MINGW64 ~/Desktop/Devops (master)
 $ git reset --hard 2d3c492161307c23bde7c041825d8a381e6145bb
 HEAD is now at 2d3c492 this is my first version'
 
+```
