@@ -124,9 +124,10 @@ $ kubectl uncordon worker-02
 $ kubectl get nodes
 
 ```
+
 Maintenance of nodes
 ===================
-```
+
 
 sles15sp3:~/test # kubectl create deployment my-nginx --image=nginx --replicas=7
 deployment. apps/my-nginx created
