@@ -31,7 +31,7 @@ $ kubeadm version
 
 5) Drain the control plane node:
 
-# replace <Node-Name> with the name of your control plane node
+ replace <Node-Name> with the name of your control plane node
 $ kubectl drain <Node-Name> --ignore-daemon sets --delete-local-data
 
 ![image](https://github.com/rkrath123/devops/assets/53966749/d6b1817e-1460-4098-87dd-562e78ecccec)
