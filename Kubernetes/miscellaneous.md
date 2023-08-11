@@ -72,6 +72,8 @@ $ kubectl get nodes
 ![image](https://github.com/rkrath123/devops/assets/53966749/8b7aeed4-b0ab-4927-a18d-0ecf8a6ddfcf)
 
 Upgrade worker nodes
+---------------------
+```
 The upgrade procedure on worker nodes should be executed one node at a time or few nodes at a time, without compromising the minimum required capacity for running your workloads.
 
 Note: Follow this section on each of your worker nodes you want to update.
@@ -121,7 +123,7 @@ $ kubectl uncordon worker-02
 
 $ kubectl get nodes
 
-
+```
 Maintenance of nodes
 ===================
 ```
