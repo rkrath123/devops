@@ -13,7 +13,7 @@ resource "aws_instance" "example" {
 }
 ```
 
-# Multiple Providers
+## Multiple Providers
 
 You can use multiple providers in one single terraform project. For example,
 
@@ -50,7 +50,7 @@ resource "azurerm_virtual_machine" "example" {
 }
 ```
 
-# Multiple Region Implementation in Terraform
+## Multiple Region Implementation in Terraform
 ```
 provider "aws" {
     region = "ap-south-1"  # Set your desired AWS region
@@ -73,5 +73,24 @@ resource "aws_instance" "example2" {
     instance_type = "t2.micro"
     key_name = "mobaxtreme"
     provider = aws.ap-south-1
+}
+```
+
+## Provider Configuration
+
+The required_providers block in Terraform is used to declare and specify the required provider configurations for your Terraform module or configuration. It allows you to specify the provider name, source, and version constraints.
+
+```
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 2.0, < 3.0"
+    }
+  }
 }
 ```
