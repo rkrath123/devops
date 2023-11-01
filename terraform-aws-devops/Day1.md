@@ -74,4 +74,4 @@ resource "aws_instance" "example2" {
     key_name = "mobaxtreme"
     provider = aws.ap-south-1
 }
-```hcl
+```
