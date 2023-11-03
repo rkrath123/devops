@@ -43,7 +43,7 @@ variable "ami_id" {
 
 ## to use module
 
-# main.tf
+#### main.tf
 ```
 provider "aws" {
     region = "ap-south-1"
