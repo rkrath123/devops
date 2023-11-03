@@ -44,6 +44,49 @@ Outputs:
 public_ip = "13.232.45.185"
 ```
 
+#####################################
+## main.tf
+```
+provider "aws" {
+    region = "ap-south-1"  # Set your desired AWS region
+
+}
+
+
+# Create an EC2 instance using the input variables
+resource "aws_instance" "example_instance" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+}
+
+# Define an output variable to expose the public IP address of the EC2 instance
+output "public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.example_instance.public_ip
+}
+```
+
+## variables.tf
+```
+
+variable "instance_type" {
+  description = "EC2 instance type"
+
+}
+
+# Define an input variable for the EC2 instance AMI ID
+variable "ami_id" {
+
+}
+```
+## terraform.tfvars
+```
+instance_type="t2.micro"
+ami_id="ami-0287a05f0ef0e9d9a"
+```
+
+## terraform apply
+
 ## Summary
 
 Here's how you typically use `.tfvars` files
