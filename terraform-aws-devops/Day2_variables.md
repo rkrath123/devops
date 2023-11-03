@@ -59,10 +59,13 @@ resource "aws_instance" "example_instance" {
   instance_type = var.instance_type
 }
 
-# Define an output variable to expose the public IP address of the EC2 instance
-output "public_ip" {
-  description = "Public IP address of the EC2 instance"
-  value       = aws_instance.example_instance.public_ip
+```
+## ouput.tf
+
+```
+output "public-ip" {
+   value= aws_instance.example_instance.public_ip
+  
 }
 ```
 
@@ -84,8 +87,17 @@ variable "ami_id" {
 instance_type="t2.micro"
 ami_id="ami-0287a05f0ef0e9d9a"
 ```
-
 ## terraform apply
+
+```
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+public-ip = "3.108.44.100"
+```
+
 
 ## Summary
 
