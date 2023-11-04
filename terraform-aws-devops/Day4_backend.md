@@ -32,7 +32,7 @@ resource "aws_dynamodb_table" "terraform_lock" {
 resource "aws_s3_bucket" "s3_bucket" {
   bucket = "ramaknt-s3-demo-xyz" # change this
 }
-``
+```
 
 ##  backend.tf
 
