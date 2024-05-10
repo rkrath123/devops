@@ -2,44 +2,45 @@ Upgrade k8s cluster
 ==================
 
 1) Determine which version to upgrade to
-
+```
 $ apt update
 $ apt-cache madison kubeadm
 apt-cache madison kubeadm
-
+```
 ![image](https://github.com/rkrath123/devops/assets/53966749/dc4e1082-629c-4eca-a898-d5edbbe65372)
 
 2) On the control plane node, run:
-
+```
 $ kubeadm upgrade plan
-
+````
 ![image](https://github.com/rkrath123/devops/assets/53966749/e8ef515f-c7fb-476b-a385-cf8429d808a1)
 
 3) Upgrading kubeadm tool
-
+```
 $ apt-mark unhold kubeadm && \
 apt-get update && apt-get install -y kubeadm=1.26.3-00 && \
 apt-mark hold kubeadm
-
+```
 ![image](https://github.com/rkrath123/devops/assets/53966749/1fe45ebc-ff35-4d01-8f9d-94ee4ccd48b9)
 
 4) Verify that the download works and has the expected version:
-
+```
 $ kubeadm version
-
+```
 ![image](https://github.com/rkrath123/devops/assets/53966749/d0ce63f3-3972-4af2-a784-3754fdeccda9)
 
 5) Drain the control plane node:
 
- replace <Node-Name> with the name of your control plane node
+replace <Node-Name> with the name of your control plane node
+```
 $ kubectl drain <Node-Name> --ignore-daemon sets --delete-local-data
-
+```
 ![image](https://github.com/rkrath123/devops/assets/53966749/d6b1817e-1460-4098-87dd-562e78ecccec)
 
 6) On the control plane node, run:
-
+```
 $ kubeadm upgrade plan
-
+```
 7) On the control plane node, run:
 
 $ kubeadm upgrade apply v1.26.3
@@ -49,26 +50,27 @@ $ kubeadm upgrade apply v1.26.3
 ![image](https://github.com/rkrath123/devops/assets/53966749/30ce25a4-9d67-4951-a48c-c5b8cb97cd9a)
 
 8) Uncordon the control plane node:
-
+```
 $ kubectl uncordon <node name>
 $ kubectl uncordon master
-
+```
 9) Upgrade kubelet and kubectl
-
+```
 $ apt-mark unhold kubelet kubectl && \
 apt-get update && apt-get install -y kubelet=1.26.3-00 kubectl=1.26.3-00 && \
 apt-mark hold kubelet kubectl
-
+```
 ![image](https://github.com/rkrath123/devops/assets/53966749/e7ebbb57-4b0c-410f-9dfb-efa7e0f04480)
 
 10) Restart the kubelet
-
+```
 $ systemctl daemon-reload
 $ systemctl restart kubelet
+```
 11) Check Version
-
+```
 $ kubectl get nodes
-
+```
 ![image](https://github.com/rkrath123/devops/assets/53966749/8b7aeed4-b0ab-4927-a18d-0ecf8a6ddfcf)
 
 Upgrade worker nodes
@@ -87,42 +89,44 @@ Upgrade kubelet & kubectl
 Uncordon the node
 
 1) Check the Version of the worker node From master machine
-
+```
 $ Kubectl get nodes
+```
 2) Upgrade kubeadm perform this on Worker Machine
-
+```
 $ apt-mark unhold kubeadm && \
 apt-get update && apt-get install -y kubeadm=1.26.3-00 && \
 apt-mark hold kubeadm
-
+```
 3) Drain the Worker Node (perform this on master Machine)
-
+```
 $ kubectl drain <node-to-drain> --ignore-daemonsets
 $ kubectl drain worker-02 --ignore-daemonsets
-
+```
 4) Upgrade kubelet config on worker node (perform this on Worker Machine)
-
+```
 $ kubeadm upgrade node
-
+```
 5) Upgrade kubelet and kubectl (perform this on Worker Machine)
-
+```
 $ apt-mark unhold kubelet kubectl && \
 apt-get update && apt-get install -y kubelet=1.18.8-00 kubectl=1.18.8-00 && \
 apt-mark hold kubelet kubectl
-
+```
 6) Restart the kubelet
-
+```
 $ systemctl daemon-reload
 $ systemctl restart kubelet
+```
 7) Uncordon the node (perform this on master Machine)
-
+```
 $ kubectl uncordon worker-02
- 
+```
 
 8) Verify the status of the cluster
-
+```
 $ kubectl get nodes
-
+```
 ```
 
 Maintenance of nodes
