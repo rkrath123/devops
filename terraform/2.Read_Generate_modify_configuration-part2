@@ -1,0 +1,917 @@
+Overview of conditional expression
+===================================
+
+![image](https://user-images.githubusercontent.com/53966749/207643722-234de117-5505-4412-9805-5cb9d9788e2f.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207643848-10b59ec6-ccf6-4c4c-b31c-93d76ab7ba07.png)
+
+```
+main.tf
+-------
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "AKIAWLC4QC"
+  secret_key = "hMgDS4SGro8SOZL"
+}
+
+
+variable "elb_names" {
+  type = list
+  default = ["dev-loadbalancer", "stage-loadbalanacer","prod-loadbalancer"]
+}
+
+variable "istest" {
+    type=bool
+    default= true
+}
+
+resource "aws_instance" "dev" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.micro"
+   count = var.istest == true ? 3 : 0
+}
+
+resource "aws_instance" "prod" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.large"
+   count = var.istest == false ? 1 : 0
+}
+
+terraform plan
+--------------
+aws_instance.dev[0] will be created
+aws_instance.dev[1] will be created
+aws_instance.dev[2] will be created
+
+
+if variable is false
+
+variable "istest" {
+    type=bool
+    default= false
+}
+
+terraform plan
+--------------
+aws_instance.prod[0] will be created
+
+```
+
+Overview of Local Values
+========================
+
+![image](https://user-images.githubusercontent.com/53966749/207794193-532c8184-f755-4f46-915a-5326a1a62d7a.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207794570-f916384f-8996-4ca6-95f1-979ff4c1bd47.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207794763-46357d37-1dd4-4f9f-aa0c-131de9b1d914.png)
+
+
+```
+local_variables.tf
+-----------------
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "efefe"
+  secret_key = "efef"
+}
+
+locals {
+  common_tags = {
+    Owner = "DevOps Team"
+    service = "backend"
+  }
+}
+resource "aws_instance" "app-dev" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.micro"
+   tags = local.common_tags
+}
+
+resource "aws_instance" "db-dev" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.small"
+   tags = local.common_tags
+}
+
+resource "aws_ebs_volume" "db_ebs" {
+  availability_zone = "us-west-2a"
+  size              = 8
+  tags = local.common_tags
+}
+
+terraform plan
+--------------
+
+  # aws_ebs_volume.db_ebs will be created
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Owner"   = "DevOps Team"
+          + "service" = "backend"
+        }
+      + tags_all                             = {
+          + "Owner"   = "DevOps Team"
+          + "service" = "backend"
+        }
+  # aws_instance.app-dev will be created
+  + resource "aws_instance" "app-dev" {
+   + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Owner"   = "DevOps Team"
+          + "service" = "backend"
+        }
+      + tags_all                             = {
+          + "Owner"   = "DevOps Team"
+          + "service" = "backend"
+        }
+        
+        
+   # aws_instance.db-dev will be created
+  + resource "aws_instance" "db-dev" {
+  
+   + tags                                 = {
+          + "Owner"   = "DevOps Team"
+          + "service" = "backend"
+        }
+      + tags_all                             = {
+          + "Owner"   = "DevOps Team"
+          + "service" = "backend"
+        }
+        
+  ```
+  
+Terraform Functions
+===================
+  
+![image](https://user-images.githubusercontent.com/53966749/207795756-f97aca89-a6c9-4d23-9bee-9fc77ba8ec75.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207795858-f77735e8-4297-4c6f-b336-ec5acd44d3d1.png)
+
+
+```
+
+C:\Users\rathram>terraform console
+> max(10,20,30)
+30
+
+> min(10,20,30)
+10
+
+>split(",", "foo,bar,baz")
+tolist([
+  "foo",
+  "bar",
+  "baz",
+])
+>
+
+> lookup({a="ay", b="bee"}, "a", "what?")
+"ay"
+> lookup({a="ay", b="bee"}, "c", "what?")
+"what?"
+
+
+
+element(list, index)
+
+>  element(["a", "b", "c"], 1)
+"b"
+>
+
+
+file(path)
+
+> file("${path.module}/hello.txt")
+Hello World
+
+
+>  timestamp()
+"2022-12-15T07:26:48Z"
+
+>  formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())
+"15 Dec 2022 07:27 UTC"
+>
+
+
+functions.tf
+-----------
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "efef"
+  secret_key = "efefef"
+}
+
+locals {
+  time = formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())
+}
+
+variable "region" {
+  default = "ap-south-1"
+}
+
+variable "tags" {
+  type = list
+  default = ["firstec2","secondec2"]
+}
+
+variable "ami" {
+  type = map
+  default = {
+    "us-east-1" = "ami-0323c3dd2da7fb37d"
+    "us-west-2" = "ami-0d6621c01e8c2de2c"
+    "ap-south-1" = "ami-0470e33cd681b2476"
+  }
+}
+
+resource "aws_key_pair" "loginkey" {
+  key_name   = "login-key"
+  public_key = file("${path.module}/id_rsa.pub")
+}
+
+resource "aws_instance" "app-dev" {
+   ami = lookup(var.ami,var.region)
+   instance_type = "t2.micro"
+   key_name = aws_key_pair.loginkey.key_name
+   count = 2
+
+   tags = {
+     Name = element(var.tags,count.index)
+   }
+}
+
+
+output "timestamp" {
+  value = local.time
+}
+
+
+
+terraform plan
+---------------
+
+    + tags                                 = {
+          + "Name" = "firstec2"
+        }
+      + tags_all                             = {
+          + "Name" = "firstec2"
+          
+    + tags                                 = {
+          + "Name" = "secondec2"
+        }
+      + tags_all                             = {
+          + "Name" = "secondec2"
+        }
+      + tenancy                              = (known after apply) 
+      
+    
+Plan: 3 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + timestamp = (known after apply)
+  
+  
+```
+
+![image](https://user-images.githubusercontent.com/53966749/207800145-cb3a232c-ac9e-4ccf-9483-6087f9376e93.png)
+![image](https://user-images.githubusercontent.com/53966749/207800177-71db3974-5447-4fb1-8f51-ebb8d9d5e21a.png)
+
+
+Data Sources in terraform
+-------------------------
+
+![image](https://user-images.githubusercontent.com/53966749/207800408-072ce359-0d04-4cf2-af6b-b6b2ff78aba1.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207800607-12c7b08c-b767-4efa-88b6-e2bd23a6c018.png)
+
+```
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "efe"
+  secret_key = "efed"
+}
+
+
+
+data "aws_ami" "app_ami" {
+  most_recent = true
+  owners = ["amazon"]
+
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm*"]
+  }
+}
+
+resource "aws_instance" "instance-1" {
+    ami = data.aws_ami.app_ami.id
+   instance_type = "t2.micro"
+}
+
+terraform plan
+----------------
+
+ # aws_instance.instance-1 will be created
+  + resource "aws_instance" "instance-1" {
+      + ami                                  = "ami-08e4eaf54ff5ee95e"
+      + arn                                  = (known after apply)
+      
+```
+
+![image](https://user-images.githubusercontent.com/53966749/207802033-520f867f-8700-4678-bdda-05cb33006be6.png)
+
+
+Debugging in terraform
+----------------------
+
+![image](https://user-images.githubusercontent.com/53966749/207802178-9c95f5b3-1c7f-45ef-af77-b9ce50219252.png)
+![image](https://user-images.githubusercontent.com/53966749/207802367-d9364002-b375-4c63-91ce-fbc05cf4e509.png)
+
+terraform plan
+---------------
+
+![image](https://user-images.githubusercontent.com/53966749/207802461-3ed0a0b6-7e31-41e5-9975-8ad9011bb11f.png)
+
+to store in file
+----------------
+![image](https://user-images.githubusercontent.com/53966749/207802729-852b81f7-d773-4aef-8790-a64e7b5885b0.png)
+![image](https://user-images.githubusercontent.com/53966749/207802792-99674e71-0676-4402-8b81-d9388c17185f.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207802841-7343ceb0-10db-48eb-8df4-d479dfe1e831.png)
+
+
+Terraform format
+-----------------
+
+![image](https://user-images.githubusercontent.com/53966749/207802985-cecf3336-36db-4187-bf62-867bdbe6f495.png)
+![image](https://user-images.githubusercontent.com/53966749/207803047-5cc6fc0c-6593-4a56-b8b5-fc7bd46bc7da.png)
+
+```
+main.tf
+-------
+provider    "aws" {
+  region     = "us-west-2"
+                     access_key = "cefe"
+  secret_key = "dcvedvce"
+}
+
+
+==>terraform fmt
+
+
+main.tf
+-------
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "wwfwfw"
+  secret_key = "wfdwefd"
+}
+
+```
+
+Terraform validate
+------------------
+
+![image](https://user-images.githubusercontent.com/53966749/207803412-65d8361c-bc3c-4a00-833d-0d286d313ff0.png)
+
+```
+main.tf
+--------
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "dvdve"
+  secret_key = "def"
+  sky=blue
+}
+
+ terraform validate
+╷
+│ Error: Unsupported argument
+│
+│   on main.tf line 5, in provider "aws":
+│    5:   sky=blue
+│
+│ An argument named "sky" is not expected here.
+
+
+
+remove sky=blue and re-run validate command
+--------------------------------------------
+ terraform validate
+Success! The configuration is valid.
+
+```
+
+Load order and semantics
+-------------------------
+![image](https://user-images.githubusercontent.com/53966749/207864003-7a16e3db-b356-4b89-ba7d-5574db529324.png)
+
+```
+
+### ec2.tf
+----------
+
+
+resource "aws_instance" "myec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.micro"
+}
+
+resource "aws_instance" "newec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.micro"
+}
+
+
+### iam_user.tf
+---------------
+
+resource "aws_iam_user" "lb" {
+  name = var.iam_user
+  path = "/system/"
+}
+
+
+### provider.tf
+-------------
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "YOUR-ACCESS-KEY"
+  secret_key = "YOUR-SECRET-KEY"
+}
+
+
+### semantics.tf
+------------------
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "YOUR-ACCESS-KEY"
+  secret_key = "YOUR-SECRET-KEY"
+}
+
+variable "iam_user" {
+  default = "demouser"
+}
+
+resource "aws_instance" "myec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.micro"
+}
+
+resource "aws_iam_user" "lb" {
+  name = var.iam_user
+  path = "/system/"
+}
+
+
+### variables.tf
+----------------
+
+
+variable "iam_user" {
+  default = "demouser"
+}
+
+
+```
+
+Dynamic block
+-------------
+![image](https://user-images.githubusercontent.com/53966749/207865239-1d9f78f9-c161-4df4-bbdc-0aff46d7332a.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207865327-38b4ac2c-4c23-4838-a96e-be1b1ac51cf4.png)
+
+```
+before.tf
+----------
+resource "aws_security_group" "demo_sg" {
+  name        = "sample-sg"
+
+  ingress {
+    from_port   = 8200
+    to_port     = 8200
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8201
+    to_port     = 8201
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8300
+    to_port     = 8300
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 9200
+    to_port     = 9200
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 9500
+    to_port     = 9500
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+```
+![image](https://user-images.githubusercontent.com/53966749/207866420-aa9d6b35-9f3f-428e-9454-f48a1d4f2568.png)
+
+```
+dynamic-block.tf
+-----------------
+variable "sg_ports" {
+  type        = list(number)
+  description = "list of ingress ports"
+  default     = [8200, 8201,8300, 9200, 9500]
+}
+
+resource "aws_security_group" "dynamicsg" {
+  name        = "dynamic-sg"
+  description = "Ingress for Vault"
+
+  dynamic "ingress" {
+    for_each = var.sg_ports
+    iterator = port
+    content {
+      from_port   = port.value
+      to_port     = port.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+  dynamic "egress" {
+    for_each = var.sg_ports
+    content {
+      from_port   = egress.value
+      to_port     = egress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+}
+
+```
+
+
+Tainting Resources in terraform
+-------------------------------
+
+![image](https://user-images.githubusercontent.com/53966749/207867825-fc0ffdc0-083f-4f69-9d3b-f5c6d1ce05ab.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207867899-65df8441-9e60-4d30-b72d-78368378a750.png)
+
+```
+main.tf
+---------
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "vef"
+  secret_key = "eve/17B45NJz"
+ 
+}
+
+
+
+resource "aws_instance" "myec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.micro"
+}
+
+
+
+terraform taint aws_instance.myec2
+-----------------------------------
+Resource instance aws_instance.myec2 has been marked as tainted.
+
+
+
+PS C:\Users\rathram\OneDrive - Hewlett Packard Enterprise\terraform\aws> terraform plan
+aws_instance.myec2: Refreshing state... [id=i-0af7a839c29d5f4a6]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # aws_instance.myec2 is tainted, so must be replaced
+-/+ resource "aws_instance" "myec2" {
+
+```
+
+![image](https://user-images.githubusercontent.com/53966749/207871487-da46aa0e-cd34-4187-b75f-666aca71fb5e.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207871883-971f02ed-aa25-4ce6-9d04-39ccfad60241.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207871750-6c349bdc-deda-4219-8d15-1b31704cb601.png)
+
+
+Splat expresseion
+-----------------
+![image](https://user-images.githubusercontent.com/53966749/207885539-21801e0d-72fd-4557-a107-3cd15188d074.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207886095-ad234902-93fd-4e43-b0e9-9742b0322c0c.png)
+
+terraform apply
+
+![image](https://user-images.githubusercontent.com/53966749/207886191-71c49451-832f-4a48-a3f5-9b518c918106.png)
+
+```
+splat.tf
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "YOUR-ACCESS-KEY"
+  secret_key = "YOUR-SECRET-KEY"
+}
+resource "aws_iam_user" "lb" {
+  name = "iamuser.${count.index}"
+  count = 3
+  path = "/system/"
+}
+
+output "arns" {
+  value = aws_iam_user.lb[*].arn
+}
+
+```
+
+![image](https://user-images.githubusercontent.com/53966749/207886379-ac176632-770c-4340-b85e-622d942ac568.png)
+
+
+Terraform Graph
+----------------
+
+![image](https://user-images.githubusercontent.com/53966749/207886567-97665baa-7695-4317-9971-d4357466ae7e.png)
+
+```
+graph.tf
+--------
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "YOUR-ACCESS-KEY"
+  secret_key = "YOUR-SECRET-KEY"
+}
+
+resource "aws_instance" "myec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.micro"
+}
+
+resource "aws_eip" "lb" {
+  instance = aws_instance.myec2.id
+  vpc      = true
+}
+
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_tls"
+
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["${aws_eip.lb.private_ip}/32"]
+
+  }
+  
+  
+terraform graph > graph.dot
+
+```
+![image](https://user-images.githubusercontent.com/53966749/207887971-621ea471-a055-4281-b67e-0ac8c32f64fc.png)
+
+```
+yum install graphviz
+cat graph.dot | dot -Tsvg > graph.svg
+
+```
+![image](https://user-images.githubusercontent.com/53966749/207887482-623d5497-5f43-4448-9b12-b3051deda8cf.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207887036-df44a192-ba7c-4522-8042-c571f0034c74.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207887119-1cef749a-cec2-4676-900b-871a2fa55e49.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207887272-e4036c4b-ec42-41ef-ad9d-ed255bd2a3db.png)
+
+![image](https://user-images.githubusercontent.com/53966749/207887378-c1865406-3b8b-42b4-a74b-5e42bc4dca85.png)
+
+
+Saving terraform plan to file
+------------------------------
+
+![image](https://user-images.githubusercontent.com/53966749/207888279-e9bad760-5334-47e3-b8b1-e808dc700c1a.png)
+
+```
+plan-file.tf
+------------
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "YOUR-ACCESS-KEY"
+  secret_key = "YOUR-SECRET-KEY"
+}
+
+
+resource "aws_instance" "myec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = "t2.micro"
+}
+
+terraform plan -out=demopath
+----------------------------- 
+Saved the plan to: demopath
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "demopath"
+    
+ terraform apply "demopath"
+ -------------------------
+aws_instance.myec2: Creating...
+aws_instance.myec2: Still creating... [10s elapsed]
+aws_instance.myec2: Still creating... [20s elapsed]
+aws_instance.myec2: Still creating... [30s elapsed]
+aws_instance.myec2: Creation complete after 37s [id=i-01509453d946fd190]
+
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+```
+
+miscellaneous
+==============
+
+Fetching Data for Maps and List in Variable
+------------------------------------------
+
+```
+fetch.tf
+----------
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "YOUR-KEY"
+  secret_key = "YOUR-KEY"
+}
+
+resource "aws_instance" "myec2" {
+   ami = "ami-082b5a644766e0e6f"
+   instance_type = var.list[1]
+}
+
+variable "list" {
+  type = list
+  default = ["m5.large","m5.xlarge","t2.medium"]
+}
+
+variable "types" {
+  type = map
+  default = {
+    us-east-1 = "t2.micro"
+    us-west-2 = "t2.nano"
+    ap-south-1 = "t2.small"
+  }
+}
+
+```
+
+Zipmap Function
+---------------
+
+```
+zipmap.tf
+---------
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "YOUR-ACCESS-KEY"
+  secret_key = "YOUR-SECRET-KEY"
+}
+
+zipmap(["pineapple","oranges","strawberry"], ["yellow","orange","red"])
+
+resource "aws_iam_user" "lb" {
+  name = "demo-user.${count.index}"
+  count = 3
+  path = "/system/"
+}
+
+output "arns" {
+  value = aws_iam_user.lb[*].arn
+}
+
+
+output "zipmap" {
+  value = zipmap(aws_iam_user.lb[*].name, aws_iam_user.lb[*].arn)
+}
+
+```
+
+Comments in terraform
+------------------------
+
+```
+comments.tf
+------------
+
+# We are running Null Provisioner.
+// This is second type of comment.
+
+/*
+Line 1
+Line 2
+Line 3
+*/
+resource "null_resource" "demo_run" {
+
+ provisioner "local-exec" {
+
+   command = "echo Null Provisioner has completed > sample.txt"
+
+  }
+}
+
+/*
+resource "null_resource" "demo_run2" {
+
+ provisioner "local-exec" {
+
+   command = "echo Null Provisioner has completed > sample.txt"
+
+  }
+}
+*/
+
+```
+
+Challenges with Count
+---------------------
+
+```
+count.tf
+--------
+provider "aws" {
+  region     = "us-west-2"
+  access_key = ""
+  secret_key = ""
+}
+
+variable "iam_names" {
+  type = list
+  default = ["user-01","user-02","user-03"]
+}
+
+resource "aws_iam_user" "iam" {
+  name = var.iam_names[count.index]
+  count = 3
+  path = "/system/"
+}
+
+```
+
+for_each in Terraform
+----------------------
+```
+Example 1 - IAM User
+---------------------
+provider "aws" {
+  region     = "us-west-2"
+  access_key = ""
+  secret_key = ""
+}
+
+resource "aws_iam_user" "iam" {
+  for_each = toset( ["user-01","user-02", "user-03"] )
+  name     = each.key
+}
+
+Example 2 - EC2 Instance
+------------------------
+
+resource "aws_instance" "myec2" {
+  ami = "ami-0cea098ed2ac54925"
+  for_each  = {
+      key1 = "t2.micro"
+      key2 = "t2.medium"
+   }
+  instance_type    = each.value
+  key_name         = each.key
+  tags =  {
+   Name = each.value
+    }
+}
+
+```
