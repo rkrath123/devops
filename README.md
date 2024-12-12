@@ -104,15 +104,15 @@ https://github.com/cherkavi/cheat-sheet
 
 https://github.com/dennyzhang/cheatsheet.dennyzhang.com
 
-Microservice app
-================
-https://github.com/GoogleCloudPlatform/microservices-demo
+
 
 
 ## opensource project
 ======================
 
 https://github.com/open-telemetry/opentelemetry-demo
+
+https://github.com/GoogleCloudPlatform/microservices-demo
 
 https://github.com/backstage/demo
 
