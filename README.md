@@ -114,6 +114,8 @@ https://github.com/open-telemetry/opentelemetry-demo
 
 https://github.com/GoogleCloudPlatform/microservices-demo
 
+https://github.com/docker/awesome-compose
+
 https://github.com/backstage/demo
 
 https://github.com/spring-projects/spring-petclinic
