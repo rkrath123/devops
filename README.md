@@ -107,3 +107,25 @@ https://github.com/dennyzhang/cheatsheet.dennyzhang.com
 Microservice app
 ================
 https://github.com/GoogleCloudPlatform/microservices-demo
+
+
+## opensource project
+======================
+
+
+Real Time Projects with complete details
+=================================
+
+https://github.com/open-telemetry/opentelemetry-demo
+https://github.com/backstage/demo
+https://github.com/spring-projects/spring-petclinic
+https://istio.io/latest/docs/examples/bookinfo/
+https://github.com/dockersamples/example-voting-app
+https://github.com/fluxcd/flux2-kustomize-helm-example
+https://github.com/redis-developer/basic-redis-chat-app-demo-python
+https://github.com/dasniko/keycloak-bookshop-demo
+https://github.com/sysdiglabs/security-playground
+https://github.com/CircleCI-Public/circleci-demo-javascript-react-app
+
+Find more such projects, watch the video till the end and use this link for the CNCF landscape
+https://landscape.cncf.io/
