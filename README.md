@@ -147,3 +147,7 @@ https://github.com/karanpratapsingh/system-design
 https://github.com/rkm-ravi94/awesome-devops-interview/tree/main
 
 https://github.com/NotHarshhaa/DevOps-Projects/tree/master
+
+https://github.com/patchy631/ai-engineering-hub
+
+https://github.com/Asabeneh/30-Days-Of-Python
