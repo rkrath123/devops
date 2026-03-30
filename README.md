@@ -155,35 +155,51 @@ https://github.com/Asabeneh/30-Days-Of-Python
 #AI
 ====
 https://github.com/handsOnLLM/Hands-On-Large-Language-Models
+
 Microsoft ML for Beginners
 https://github.com/microsoft/ML-For-Beginners
+
 100 Days of ML Coding
 https://github.com/Avik-Jain/100-Days-Of-ML-Code
+
 Algorithms in Python
 https://github.com/TheAlgorithms/Python
+
 Mathematics for ML
 https://github.com/mml-book/mml-book
+
 Made With ML
 https://github.com/GokuMohandas/Made-With-ML
+
 Deep Learning Papers
 https://github.com/floodsung/Deep-Learning-Papers-Reading-Roadmap
+
 Neural Networks: Zero to Hero
 https://github.com/karpathy/nn-zero-to-hero
+
 Hands-On LLMs
 https://github.com/HandsOnLLM/Hands-On-Large-Language-Models
+
 Prompt Engineering Guide
 https://github.com/dair-ai/Prompt-Engineering-Guide
+
 AI Agents for Beginners
 https://github.com/microsoft/ai-agents-for-beginners
+
 GenAI Agent Techniques
 https://github.com/NirDiamant/GenAI_Agents
+
 RAG Techniques
 https://github.com/NirDiamant/RAG_Techniques
+
 Data Science
 https://github.com/jakevdp/PythonDataScienceHandbook
+
 NLP Resources
 https://github.com/keon/awesome-nlp
+
 Reinforcement Learning
 https://github.com/dennybritz/reinforcement-learning
+
 RL from Scratch
 https://github.com/vwxyzjn/rl-from-scratch
