@@ -155,6 +155,8 @@ https://github.com/Asabeneh/30-Days-Of-Python
 #AI
 ====
 
+https://github.com/rohitg00
+
 https://github.com/mlabonne/llm-course/
 
 Microsoft ML for Beginners
