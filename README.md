@@ -159,6 +159,8 @@ https://github.com/rohitg00
 
 https://github.com/mlabonne/llm-course/
 
+https://github.com/Shubhamsaboo/awesome-llm-apps
+
 Microsoft ML for Beginners
 https://github.com/microsoft/ML-For-Beginners
 
