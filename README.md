@@ -158,6 +158,7 @@ https://github.com/Asabeneh/30-Days-Of-Python
 https://github.com/rohitg00
 
 https://github.com/ashishpatel26/500-AI-Machine-learning-Deep-learning-Computer-vision-NLP-Projects-with-code
+
 https://github.com/mlabonne/llm-course/
 
 https://github.com/Shubhamsaboo/awesome-llm-apps
