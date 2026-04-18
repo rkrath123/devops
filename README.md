@@ -152,6 +152,8 @@ https://github.com/patchy631/ai-engineering-hub
 
 https://github.com/Asabeneh/30-Days-Of-Python
 
+https://github.com/dipakkr/A-to-Z-Resources-for-Students
+
 #AI
 ====
 
