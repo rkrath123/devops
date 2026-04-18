@@ -59,6 +59,8 @@ https://www.pythoncheatsheet.org/
 
 https://github.com/dennyzhang/cheatsheet-python-A4
 
+https://github.com/Asabeneh/30-Days-Of-Python
+
 
 Shell Scripting Cheatsheet
 ---------------------------
@@ -104,7 +106,9 @@ https://github.com/cherkavi/cheat-sheet
 
 https://github.com/dennyzhang/cheatsheet.dennyzhang.com
 
+https://github.com/karanpratapsingh/system-design
 
+https://github.com/rkm-ravi94/awesome-devops-interview
 
 
 ## opensource project
