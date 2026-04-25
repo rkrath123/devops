@@ -163,6 +163,8 @@ https://github.com/dipakkr/A-to-Z-Resources-for-Students
 
 https://github.com/rohitg00
 
+https://github.com/NirDiamant/genai_agents
+
 https://github.com/ashishpatel26/500-AI-Agents-Projects
 
 https://github.com/ashishpatel26/500-AI-Machine-learning-Deep-learning-Computer-vision-NLP-Projects-with-code
