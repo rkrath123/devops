@@ -152,8 +152,6 @@ https://github.com/rkm-ravi94/awesome-devops-interview/tree/main
 
 https://github.com/NotHarshhaa/DevOps-Projects/tree/master
 
-https://github.com/patchy631/ai-engineering-hub
-
 https://github.com/Asabeneh/30-Days-Of-Python
 
 https://github.com/dipakkr/A-to-Z-Resources-for-Students
@@ -166,6 +164,9 @@ https://github.com/rohitg00
 https://github.com/NirDiamant/genai_agents
 
 https://github.com/ashishpatel26/500-AI-Agents-Projects
+
+
+https://github.com/patchy631/ai-engineering-hub
 
 https://github.com/ashishpatel26/500-AI-Machine-learning-Deep-learning-Computer-vision-NLP-Projects-with-code
 
