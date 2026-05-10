@@ -156,6 +156,22 @@ https://github.com/Asabeneh/30-Days-Of-Python
 
 https://github.com/dipakkr/A-to-Z-Resources-for-Students
 
+
+#System Design
+=============
+https://github.com/systemdesign42/system-design-academy
+
+https://github.com/ombharatiya/ai-system-design-guide
+
+https://github.com/kubernetes/examples/tree/master/web/guestbook-go
+
+https://github.com/kubernetes/examples/tree/master/AI/vllm-deployment
+
+https://github.com/vishakhasadhwani/devops-ai-playbook.git
+
+https://github.com/karanpratapsingh/system-design
+
+
 #AI
 ====
 
