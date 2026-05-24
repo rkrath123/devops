@@ -161,6 +161,8 @@ https://github.com/dipakkr/A-to-Z-Resources-for-Students
 =============
 https://github.com/systemdesign42/system-design-academy
 
+https://github.com/donnemartin/system-design-primer
+
 https://github.com/ombharatiya/ai-system-design-guide
 
 https://github.com/kubernetes/examples/tree/master/web/guestbook-go
