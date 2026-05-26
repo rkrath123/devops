@@ -38,6 +38,7 @@ https://github.com/Tikam02/DevOps-Guide/tree/master/Container-orchestration/kube
 
 https://github.com/bregman-arie/devops-exercises/tree/master/topics/kubernetes
 
+https://github.com/omerbsezer/Fast-Kubernetes
 
 Ansible Cheatsheet
 -------------------
