@@ -197,10 +197,15 @@ https://github.com/steven2358/awesome-generative-ai
 Microsoft ML for Beginners
 
 https://github.com/microsoft/generative-ai-for-beginners
+
 https://github.com/microsoft/ai-agents-for-beginners
+
 https://github.com/openai/openai-cookbook
+
 https://github.com/GoogleCloudPlatform/generative-ai
+
 https://github.com/huggingface/transformers
+
 https://github.com/microsoft/ML-For-Beginners
 
 100 Days of ML Coding
