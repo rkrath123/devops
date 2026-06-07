@@ -40,6 +40,8 @@ https://github.com/bregman-arie/devops-exercises/tree/master/topics/kubernetes
 
 https://github.com/omerbsezer/Fast-Kubernetes
 
+
+https://github.com/NotHarshhaa/kubernetes-projects-learning
 Ansible Cheatsheet
 -------------------
 
